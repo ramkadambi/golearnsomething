@@ -241,6 +241,73 @@
             font-size: 2.5rem;
         }
 
+        .waitlist-form {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 920px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background-color: rgba(255,255,255,0.95);
+            padding: 14px 16px;
+            font-size: 1rem;
+            color: #0f172a;
+            margin-top: 10px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.9);
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.18);
+        }
+
+        .waitlist-form label {
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .form-status {
+            color: #f8fafc;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .form-status.success {
+            color: #bbf7d0;
+        }
+
+        .form-status.error {
+            color: #fecaca;
+        }
+
+        .btn[type="submit"] {
+            min-width: 240px;
+            text-align: center;
+        }
+
         /* Mission Catalog Cards */
 .mission-grid {
     display: grid;
@@ -293,6 +360,10 @@
         gap: 20px;
     }
 
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
     .mission-card img {
         height: 220px;
     }
@@ -316,6 +387,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
             .hero, .split-section, .split-section:nth-child(even) {
                 flex-direction: column;
                 padding: 40px 0;
@@ -342,8 +417,8 @@
             <h1>Don't Just Study Science. <span style="color: var(--orange);">Build It.</span></h1>
             <p>"Learn Something" transforms your apartment clubhouse into a hands-on engineering lab for Grades 3–6. We replace rote memorization with "Mission Impossible" building challenges.</p>
             <div class="button-group">
-                <a href="#cta" class="btn btn-primary">See Upcoming Missions</a>
-                <a href="#cta" class="btn btn-secondary">Bring Us to Your Community</a>
+                <a href="#choose-mission" class="btn btn-primary">See Upcoming Missions</a>
+                <a href="#waitlist" class="btn btn-secondary">Bring Us to Your Community</a>
             </div>
         </div>
         <div class="hero-image">
@@ -369,10 +444,10 @@
         </div>
     </section>
 
-<section class="split-section container">
+<section id="choose-mission" class="split-section container">
 <div class="split-content">
 
-    <h2 style="text-align:center;">Choose Your Next Mission.</h2>
+    <h2 style="text-align:center;">Choose Your Next Mission</h2>
 
     <p style="text-align:center; max-width:800px; margin:0 auto 40px auto;">
         Every workshop is built like an immersive engineering adventure where children solve
@@ -515,7 +590,7 @@
     <section class="split-section container">
         <div class="split-content">
             <h2>Premium Education, Zero Hassle.</h2>
-            <p>We know you want the best for your child, but driving through evening traffic to a distant tuition center is exhausting. GoLearnSomething operates exactly where you need us.</p>
+            <p>We know you want the best for your child, but driving through evening traffic to a distant tuition center is exhausting. "Learn Something" operates exactly where you need us.</p>
             <ul class="process-list">
                 <li><strong>Unmatched Convenience</strong> We operate exclusively in residential community clubhouses. High-quality learning is just an elevator ride away.</li>
                 <li><strong>Visible Outcomes</strong> No more asking, "What did you learn today?" Your child walks in holding a working piece of technology.</li>
@@ -579,7 +654,7 @@
         best when they actively build meaningful physical creations and solve problems through experimentation.
     </p>
 
-    <a href="https://www.media.mit.edu/" target="_blank" class="btn btn-secondary" style="margin-top:20px;">
+    <a href="https://www.media.mit.edu/projects/constructionism/overview/" target="_blank" class="btn btn-secondary" style="margin-top:20px;">
         Read More
     </a>
 </div>
@@ -588,14 +663,44 @@
     </section>
 
     
-    <section id="cta" class="cta-section">
+    <section id="waitlist" class="cta-section">
         <div class="container">
             <h2>Ready for their First Mission?</h2>
-            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto;">Give your child the tools to build their own future. Talk to us about organizing a trial session for your apartment community today.</p>
-            <div class="button-group" style="justify-content: center;">
-                <a href="#" class="btn btn-primary">WhatsApp Us Now</a>
-                <a href="#" class="btn" style="background: transparent; border: 2px solid white; color: white;">Join the Waitlist</a>
-            </div>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto;">Give your child the tools to build their own future. Share your community details below and we will reach out to schedule a session.</p>
+            <form id="waitlist-form" class="waitlist-form" autocomplete="off">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="location">Preferred community area</label>
+                        <select id="location" name="location" class="form-control" required>
+                            <option value="">Select an area</option>
+                            <option value="OMR">OMR</option>
+                            <option value="Velachery">Velachery</option>
+                            <option value="Pallavaram Radial Road Apartments">Pallavaram Radial Road Apartments</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="apartmentName">Apartment name</label>
+                        <input id="apartmentName" name="apartmentName" class="form-control" type="text" placeholder="Apartment / community name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactInfo">Contact info</label>
+                        <input id="contactInfo" name="contactInfo" class="form-control" type="text" placeholder="Phone or email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedStudents">Expected number of students</label>
+                        <input id="expectedStudents" name="expectedStudents" class="form-control" type="number" min="1" placeholder="e.g. 10" required>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="comments">Comments</label>
+                        <textarea id="comments" name="comments" class="form-control" rows="4" placeholder="Basic details or questions"></textarea>
+                    </div>
+                </div>
+                <div class="button-group" style="justify-content: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Submit Waitlist Request</button>
+                </div>
+                <p id="form-status" class="form-status" role="status"></p>
+            </form>
         </div>
     </section>
 
@@ -607,5 +712,69 @@
         </div>
     </footer>
 
+    <script>
+        var waitlistForm = document.getElementById('waitlist-form');
+        var locationField = waitlistForm.location;
+        var commentsField = waitlistForm.comments;
+        var commentsLabel = document.querySelector('label[for="comments"]');
+
+        locationField.addEventListener('change', function() {
+            if (locationField.value === 'Other') {
+                commentsField.required = true;
+                commentsLabel.textContent = 'Comments / full address';
+                commentsField.placeholder = 'Please provide your full address';
+            } else {
+                commentsField.required = false;
+                commentsLabel.textContent = 'Comments';
+                commentsField.placeholder = 'Basic details or questions';
+            }
+        });
+
+        waitlistForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var form = event.target;
+            var data = {
+                submittedAt: new Date().toISOString(),
+                location: form.location.value,
+                apartmentName: form.apartmentName.value.trim(),
+                contactInfo: form.contactInfo.value.trim(),
+                expectedStudents: form.expectedStudents.value,
+                comments: form.comments.value.trim()
+            };
+
+            var isOther = data.location === 'Other';
+            var isCommentsRequired = isOther;
+
+            if (!data.location || !data.apartmentName || !data.contactInfo || !data.expectedStudents || (isCommentsRequired && !data.comments)) {
+                if (isCommentsRequired && !data.comments) {
+                    setStatus('Please provide the full address in comments when selecting Other.', 'error');
+                } else {
+                    setStatus('Please complete all required fields.', 'error');
+                }
+                return;
+            }
+
+            var json = JSON.stringify(data, null, 2);
+            var blob = new Blob([json], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'learn-something-waitlist-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            setStatus('Your waitlist request is ready to save. A JSON file has been downloaded for your records.', 'success');
+            form.reset();
+        });
+
+        function setStatus(message, type) {
+            var status = document.getElementById('form-status');
+            status.textContent = message;
+            status.className = 'form-status ' + type;
+        }
+    </script>
 </body>
 </html>
