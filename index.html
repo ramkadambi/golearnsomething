@@ -6,12 +6,16 @@
     <title>Lern Smthg | Hands-on STEM for Grades 3-6</title>
     <style>
         :root {
-            --teal: #0d9488;
-            --orange: #ea580c;
+            --teal: #06b6d4;
+            --orange: #f97316;
             --navy: #0f172a;
+            --dark-bg: #0a0e27;
+            --dark-card: #1a1f3a;
             --light-bg: #f8fafc;
             --white: #ffffff;
             --text-main: #334155;
+            --accent-purple: #8b5cf6;
+            --accent-lime: #84cc16;
         }
 
         * {
@@ -24,13 +28,19 @@
         body {
             color: var(--text-main);
             line-height: 1.6;
-            background-color: var(--light-bg);
+            background-color: var(--dark-bg);
         }
 
         h1, h2, h3, h4 {
-            color: var(--navy);
+            color: #ffffff;
             line-height: 1.2;
             margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
         }
 
         p {
@@ -56,47 +66,61 @@
         }
 
         .btn-primary {
-            background-color: var(--orange);
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             color: var(--white);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #c2410c;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(249, 115, 22, 0.6);
         }
 
         .btn-secondary {
-            background-color: var(--teal);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: var(--white);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background-color: #0f766e;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
         }
 
         /* Header */
         header {
-            background-color: var(--white);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
             padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--navy);
+            font-weight: 900;
+            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
         }
 
         .logo span {
-            color: var(--teal);
+            background: linear-gradient(135deg, #f97316 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Hero Section */
         .hero {
             padding: 80px 0;
-            background-color: var(--white);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
             display: flex;
             align-items: center;
             gap: 40px;
@@ -108,11 +132,18 @@
 
         .hero-text h1 {
             font-size: 3rem;
+            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: -1px;
         }
 
         .hero-text p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            color: #cbd5e1;
         }
 
         .hero-image {
@@ -136,15 +167,25 @@
             display: flex;
             align-items: center;
             gap: 60px;
+            background: var(--dark-bg);
         }
 
         .split-section:nth-child(even) {
-            background-color: var(--white);
+            background: linear-gradient(135deg, var(--dark-card) 0%, rgba(6, 182, 212, 0.05) 100%);
             flex-direction: row-reverse;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
         }
 
         .split-content {
             flex: 1;
+        }
+
+        .split-content h2 {
+            color: #ffffff;
+        }
+
+        .split-content p {
+            color: #cbd5e1;
         }
 
         .split-image {
@@ -164,15 +205,23 @@
         }
 
         .process-list li {
-            background: var(--light-bg);
+            background: rgba(6, 182, 212, 0.08);
             padding: 15px 20px;
             margin-bottom: 10px;
-            border-left: 4px solid var(--teal);
+            border-left: 4px solid #06b6d4;
             border-radius: 0 6px 6px 0;
+            transition: all 0.3s ease;
+            color: #cbd5e1;
+        }
+
+        .process-list li:hover {
+            transform: translateX(4px);
+            background: rgba(6, 182, 212, 0.15);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
         }
 
         .process-list li strong {
-            color: var(--navy);
+            color: #06b6d4;
             display: block;
         }
 
@@ -195,13 +244,34 @@
     margin-top: 40px;
 }
 
+@media (max-width: 768px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
         .card {
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(26, 31, 58, 0.6);
             padding: 30px;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: left;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(26, 31, 58, 0.8);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .card p {
+            color: #cbd5e1;
         }
 
         .light-card {
@@ -224,7 +294,7 @@
         }
 
         .card h3 {
-            color: var(--teal);
+            color: #06b6d4;
             font-size: 1.2rem;
         }
 
@@ -232,25 +302,58 @@
         .cta-section {
             text-align: center;
             padding: 100px 0;
-            background-color: var(--teal);
+            background: linear-gradient(135deg, var(--dark-card) 0%, rgba(6, 182, 212, 0.08) 50%, var(--dark-bg) 100%);
             color: var(--white);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(6, 182, 212, 0.2);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(6, 182, 212, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .cta-section h2 {
             color: var(--white);
             font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section > .container > p {
+            color: #cbd5e1;
+            position: relative;
+            z-index: 1;
         }
 
         .waitlist-form {
             margin-top: 40px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(26, 31, 58, 0.8);
+            border: 2px solid rgba(6, 182, 212, 0.3);
             border-radius: 20px;
             padding: 30px;
             max-width: 920px;
             margin-left: auto;
             margin-right: auto;
             text-align: left;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .waitlist-form:focus-within {
+            background: rgba(26, 31, 58, 0.95);
+            border-color: rgba(6, 182, 212, 0.5);
         }
 
         .form-grid {
@@ -270,37 +373,44 @@
 
         .form-control {
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.35);
-            background-color: rgba(255,255,255,0.95);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            background-color: rgba(15, 23, 42, 0.8);
             padding: 14px 16px;
             font-size: 1rem;
-            color: #0f172a;
+            color: #cbd5e1;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: rgba(255,255,255,0.9);
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.18);
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+            background-color: rgba(15, 23, 42, 0.95);
+            color: #ffffff;
+        }
+
+        .form-control::placeholder {
+            color: rgba(203, 213, 225, 0.5);
         }
 
         .waitlist-form label {
             font-weight: 600;
-            color: rgba(255,255,255,0.9);
+            color: #cbd5e1;
         }
 
         .form-status {
-            color: #f8fafc;
+            color: #cbd5e1;
             margin-top: 20px;
             font-size: 1rem;
         }
 
         .form-status.success {
-            color: #bbf7d0;
+            color: #84cc16;
         }
 
         .form-status.error {
-            color: #fecaca;
+            color: #f87171;
         }
 
         .btn[type="submit"] {
@@ -317,16 +427,26 @@
 }
 
 .mission-card {
-    background: #ffffff;
+    background: rgba(26, 31, 58, 0.7);
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid rgba(6, 182, 212, 0.2);
 }
 
 .mission-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 35px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(6, 182, 212, 0.25);
+    border-color: rgba(6, 182, 212, 0.6);
+    background: rgba(26, 31, 58, 0.9);
+}
+
+.mission-card:hover .mission-card img {
+    filter: brightness(1.15);
+    display: block;
+    transition: filter 0.3s ease;
 }
 
 .mission-card img {
@@ -334,6 +454,7 @@
     height: 240px;
     object-fit: cover;
     display: block;
+    transition: filter 0.3s ease;
 }
 
 .mission-content {
@@ -342,13 +463,13 @@
 
 .mission-content h3 {
     margin-bottom: 12px;
-    color: var(--navy);
+    color: #06b6d4;
     font-size: 1.2rem;
 }
 
 .mission-content p {
     margin-bottom: 0;
-    color: #475569;
+    color: #cbd5e1;
     line-height: 1.6;
 }
 
@@ -379,10 +500,11 @@
 
         /* Footer */
         footer {
-            background-color: var(--navy);
-            color: #94a3b8;
+            background-color: var(--dark-bg);
+            color: #64748b;
             padding: 40px 0;
             text-align: center;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
         }
 
         /* Responsive */
@@ -401,6 +523,22 @@
             .button-group {
                 flex-direction: column;
             }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .split-section {
+                gap: 30px;
+            }
+            
+            .cta-section {
+                padding: 60px 0;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -408,13 +546,13 @@
 
     <header>
         <div class="container">
-            <div class="logo">Lern<span>Smthg</span></div>
+            <div class="logo">Lrn<span>Smthg</span></div>
         </div>
     </header>
 
     <section class="hero container">
         <div class="hero-text">
-            <h1>Don't Just Study Science. <span style="color: var(--orange);">Build It.</span></h1>
+            <h1>Don't Just Study Science<br><span style="color: var(--orange);">Engineer It.</span></h1>
             <p>"Learn Something" transforms your apartment clubhouse into a hands-on engineering lab for Grades 3–6. We replace rote memorization with "Mission Impossible" building challenges.</p>
             <div class="button-group">
                 <a href="#choose-mission" class="btn btn-primary">See Upcoming Missions</a>
@@ -430,7 +568,7 @@
 
     <section class="split-section container">
         <div class="split-content">
-            <h2>Real Engineering, Disguised as an Adventure.</h2>
+            <h2>Real Engineering.<br><span style="color: var(--orange);">Disguised as Adventure.</span></h2>
             <p>We bring expert-led, interactive STEM workshops directly to your residential community. Instead of reading textbooks, students learn Physics and Math by solving high-stakes stories.</p>
             <ul class="process-list">
                 <li><strong>1. The Mission Brief</strong> Every session begins with a story—like building a laser-tripwire alarm to protect a vault.</li>
@@ -589,7 +727,7 @@
 </section>
     <section class="split-section container">
         <div class="split-content">
-            <h2>Premium Education, Zero Hassle.</h2>
+            <h2>Premium Education.<br><span style="color: var(--orange);">Zero Hassle.</span></h2>
             <p>We know you want the best for your child, but driving through evening traffic to a distant tuition center is exhausting. "Learn Something" operates exactly where you need us.</p>
             <ul class="process-list">
                 <li><strong>Unmatched Convenience</strong> We operate exclusively in residential community clubhouses. High-quality learning is just an elevator ride away.</li>
@@ -607,15 +745,15 @@
     
     <section class="split-section container">
         <div class="container">
-            <h2>Backed by the Science of Learning</h2>
-            <p>Our curriculum design is rooted in "Constructionism"—a learning theory championed by the world's leading technical institutes.</p>
+            <h2>Backed by Science.<br><span style="color: var(--orange);">Proven to Work.</span></h2>
+            <p style="color: #cbd5e1; max-width: 700px; margin: 0 auto 40px auto; font-size: 1.1rem;">Our curriculum design is grounded in Indiana University cognitive neuroscience research showing that self-generated action changes how children learn, recognize symbols, and build math understanding.</p>
             
             <div class="grid-3">
                 <div class="card">
                     <img src="Images/indiana-logo.png" alt="Indiana University Logo" class="uni-logo">
-                    <h3>The Power of "Doing"</h3>
-                    <p><strong>Indiana University</strong> research shows that when kids physically interact with components (like building circuits), they map complex math concepts directly into their neural networks.</p>
-                    <a href="https://www.iu.edu/brand/index.html"
+                    <h3>Action Shapes Learning</h3>
+                    <p><strong>Indiana University</strong> research from Karin H. James shows that self-generated motor actions create richer learning episodes and reshape brain systems for perception, symbol recognition, reading, and math.</p>
+                    <a href="https://psych.indiana.edu/directory/faculty/james-harman-karin.html"
        target="_blank"
        class="btn btn-secondary"
        style="margin-top:20px;">
@@ -624,9 +762,9 @@
                 </div>
                 <div class="card">
                     <img src="Images/stanford-logo.png" alt="Stanford University Logo" class="uni-logo">
-                    <h3>The Narrative Hook</h3>
-                    <p><strong>Stanford University</strong> studies suggest the brain is wired for stories. We remember facts 22x more effectively when they are part of a narrative—like our Mission Briefing.</p>
-                    <a href="https://identity.stanford.edu/"
+                    <h3>Educational Neuroscience</h3>
+                    <p><strong>Stanford</strong> research from the Educational Neuroscience Initiative shows that middle school students gain stronger brain-based learning when they engage in real science experiences with guided mentors.</p>
+                    <a href="https://ed.stanford.edu/news/getting-head-start"
        target="_blank"
        class="btn btn-secondary"
        style="margin-top:20px;">
@@ -635,9 +773,9 @@
                 </div>
                 <div class="card">
                     <img src="Images/harvard-logo.png" alt="Harvard University Logo" class="uni-logo">
-                    <h3>The Protégé Effect</h3>
-                    <p><strong>Harvard University</strong> validates our Presentation phase. When students explain their project on video, they reinforce their own mastery through meta-cognitive reflection.</p>
-                    <a href="https://www.harvard.edu/"
+                    <h3>Brain Architecture</h3>
+                    <p><strong>Harvard</strong> research shows that strong learning foundations are built through active, high-quality experiences and supportive environments that shape the brain’s architecture.</p>
+                    <a href="https://developingchild.harvard.edu/resource-guides/guide-brain-architecture/"
        target="_blank"
        class="btn btn-secondary"
        style="margin-top:20px;">
