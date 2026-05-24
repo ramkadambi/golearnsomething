@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | SRM Vadapalani Pitch Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        p { margin: 0; margin-bottom: 12px; }
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            padding: 40px 0;
+            place-items: center;
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+            color: #1e293b;
+        }
+
+        .slide-container h1, .slide-container h2, .slide-container h3 {
+            color: #0f172a;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
+
+        .slide-container h1 { font-size: 54px; line-height: 1.2; }
+        .slide-title {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: left;
+            width: 100%;
+            border-left: 6px solid #38bdf8;
+            padding-left: 20px;
+        }
+
+        .slide-container p, .slide-container li { font-size: 20px; line-height: 1.6; color: #475569; }
+        
+        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; align-items: center; }
+        
+        .image-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        /* New: focused crops for character image + footer */
+        .image-main { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.08); height: 360px; }
+        .image-main img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+        .image-footer { width: 100%; height: 90px; margin-top: 12px; overflow: hidden; border-radius: 0 0 12px 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.06); background-size: cover; background-position: center bottom; }
+        
+        .bullet-list ul { list-style: none; padding: 0; }
+        .bullet-list li { position: relative; padding-left: 35px; margin-bottom: 15px; }
+        .bullet-list i { position: absolute; left: 0; top: 5px; color: #f97316; font-size: 22px; }
+
+        .text-accent { color: #38bdf8; }
+        .bg-dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; }
+        .bg-dark h1, .bg-dark h2, .bg-dark p, .bg-dark li { color: white; }
+    </style>
+</head>
+<body>
+
+<div class="slide-container bg-dark">
+    <div class="content-area two-column">
+        <div>
+            <h1>LearnSMTH x SpaceX Inspired Experiential STEM Learning</h1>
+            <p style="font-size: 28px; color: #94a3b8; margin: 20px 0;">"Turning Curiosity Into Real-World Innovation"</p>
+            <hr style="border-color: #38bdf8; margin: 30px 0;">
+            <p><strong>SRM Vadapalani Incubation Center Pitch</strong></p>
+            <p><em>Presenter: BBA Final Year Student</em></p>
+        </div>
+        <div class="image-wrapper" style="height: 450px;">
+            <img src="Kidsincommunityhallwithparents.png" alt="South Indian kids building electronics">
+        </div>
+    </div>
+</div>
+ 
+    <div class="slide-container">
+        <h2 class="slide-title">News Clip: SpaceX Starship Test</h2>
+        <div class="content-area two-column">
+            <div>
+                <p style="font-size:22px; margin-bottom:20px;">A recent SpaceX Starship test flight made headlines — a high-altitude launch with simulated satellite deployment and a controlled splashdown. LearnSMTH used this real-world event as a springboard for student learning.</p>
+                <div class="bullet-list">
+                    <ul>
+                        <li><strong>Class Activity:</strong> Guided news-reading and timeline reconstruction.</li>
+                        <li><strong>Hands-on Lab:</strong> Build simple rocket models to explore Newton's laws and aerodynamics.</li>
+                        <li><strong>Design Challenge:</strong> Teams design a sensor payload for community monitoring.</li>
+                        <li><strong>Data Skills:</strong> Interpret launch telemetry, times, and basic charts.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" style="height:400px;">
+                <img src="spaceXnewsclip.jpeg" alt="SpaceX Starship news clip">
+            </div>
+        </div>
+        <div style="width:100%; margin-top:20px; background:#f8fafc; padding:20px; border-radius:12px;">
+            <h3 style="margin:0 0 10px 0; color:#0f172a;">How Kids Learn</h3>
+            <p>We turn the clip into an integrated learning module: storytelling, role-play (engineers & reporters), measurement labs, safe chemistry demos, simple coding for sensors, teamwork, and reflection to connect media with STEM concepts.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+    <h2 class="slide-title">The Problem With Traditional Learning</h2>
+    <div class="content-area two-column">
+        <div>
+            <h3 style="color: #ef4444; margin-bottom: 20px;"><i class="fa-solid fa-circle-xmark"></i> Current Limitations</h3>
+            <div class="bullet-list">
+                <ul>
+                    <li>Memorization-heavy learning</li>
+                    <li>Low curiosity retention & lack of application</li>
+                    <li>Fear of failure in STEM subjects</li>
+                    <li>STEM disconnected from real life</li>
+                </ul>
+            </div>
+        </div>
+        <div style="background: #f8fafc; padding: 40px; border-radius: 12px; border-top: 5px solid #10b981;">
+            <h3 style="color: #10b981; margin-bottom: 15px;">Our Core Belief</h3>
+            <p>Children learn deeply when they are <strong>emotionally engaged</strong>, solving meaningful problems, collaborating, and building something real.</p>
+            <p style="font-style: italic; margin-top: 20px; font-weight: bold;">"What if children didn't just study science... but BUILT solutions inspired by SpaceX?"</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Meet The Spark Squad</h2>
+    <div class="content-area">
+        <p style="text-align: center; font-size: 22px; margin-bottom: 30px;">Children emotionally connect with recurring STEM heroes. This creates continuity, engagement, learning identity, and long-term retention.</p>
+        <div style="width:100%;">
+            <div class="image-main">
+                <img src="image_47f006.jpeg" alt="Spark Squad Characters">
+            </div>
+            <div class="image-footer" style="background-image:url('image_47f006.jpeg');" aria-hidden="true"></div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Mission 04: The Community Satellite Challenge</h2>
+    <div class="content-area two-column">
+        <div>
+            <h3>Story Setup</h3>
+            <p>A cyclone warning system failed near OMR Chennai.</p>
+            <p>The Spark Squad is challenged to design a mini community rocket + satellite mission that can help monitor:</p>
+            <div class="bullet-list">
+                <ul>
+                    <li>Flooding and Rainfall</li>
+                    <li>Heat</li>
+                    <li>Emergency alerts</li>
+                </ul>
+            </div>
+            <p style="font-weight: bold; color: #38bdf8; font-size: 24px; margin-top: 20px;">Big Question: "How can young innovators use technology to help communities?"</p>
+        </div>
+        <div class="image-wrapper" style="height: 400px;">
+            <img src="Kidsincommunityhallwithparents.png" alt="Collaborative Hardware Building">
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Turning Curiosity Into Core STEM Knowledge</h2>
+    <div class="content-area" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;">
+        <div style="background: #f1f5f9; padding: 30px; border-radius: 12px;">
+            <h3><i class="fa-solid fa-rocket" style="color: #3b82f6;"></i> Physics</h3>
+            <p><strong>Newton's Third Law:</strong> Rocket pushes gases down → rocket moves up.</p>
+            <p><strong>Aerodynamics:</strong> Why rocket shape matters.</p>
+            <p><em>Students EXPERIENCE physics instead of memorizing formulas.</em></p>
+        </div>
+        <div style="background: #f1f5f9; padding: 30px; border-radius: 12px;">
+            <h3><i class="fa-solid fa-flask" style="color: #10b981;"></i> Chemistry</h3>
+            <p><strong>Combustion:</strong> Fuel + Oxygen reactions.</p>
+            <p><strong>Energy:</strong> Heat generation & pressure build-up.</p>
+            <p><em>Focus on safe, visual and age-appropriate understanding.</em></p>
+        </div>
+        <div style="background: #f1f5f9; padding: 30px; border-radius: 12px;">
+            <h3><i class="fa-solid fa-calculator" style="color: #f59e0b;"></i> Math</h3>
+            <p>Measurement, Angles, Timing, and Distance calculation.</p>
+            <p><em>Emotional Shift: Children stop asking "Why do we learn math?"</em></p>
+            <p><em>Instead: "We need math to improve our rocket."</em></p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Why SRM Vadapalani? Shared Vision</h2>
+    <div class="content-area two-column">
+        <div class="bullet-list">
+            <h3 style="margin-bottom: 20px;">Opportunity For Collaboration</h3>
+            <ul>
+                <li>Incubation mentorship</li>
+                <li>Prototype support & PCB development guidance</li>
+                <li>Maker lab collaboration</li>
+                <li>Engineering student volunteers</li>
+            </ul>
+            <p style="font-weight: bold; font-size: 24px; color: #0f172a; margin-top: 30px;">Building India's next generation of innovators.</p>
+        </div>
+        <div style="text-align: center; background: #0f172a; padding: 40px; border-radius: 12px; color: white;">
+            <h3 style="color: #38bdf8; margin-bottom: 20px;">The End Goal</h3>
+            <p style="color: white; font-size: 24px; font-style: italic;">"What If Chennai Apartments Became Innovation Labs?"</p>
+            <hr style="border-color: #475569; margin: 30px 0;">
+            <p style="color: white; font-weight: bold;">"Today's mission-based learners can become tomorrow's innovators."</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
