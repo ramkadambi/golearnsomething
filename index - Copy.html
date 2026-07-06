@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | Hands-on STEM for Grades 3-6</title>
+    <style>
+        :root {
+            --teal: #06b6d4;
+            --orange: #f97316;
+            --navy: #0f172a;
+            --dark-bg: #0a0e27;
+            --dark-card: #1a1f3a;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #334155;
+            --accent-purple: #8b5cf6;
+            --accent-lime: #84cc16;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+        }
+
+        h1, h2, h3, h4 {
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: var(--white);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(249, 115, 22, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: var(--white);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #f97316 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Two Column Layouts */
+        .split-section {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: var(--dark-bg);
+        }
+
+        .split-section:nth-child(even) {
+            background: linear-gradient(135deg, var(--dark-card) 0%, rgba(6, 182, 212, 0.05) 100%);
+            flex-direction: row-reverse;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .split-content {
+            flex: 1;
+        }
+
+        .split-content h2 {
+            color: #ffffff;
+        }
+
+        .split-content p {
+            color: #cbd5e1;
+        }
+
+        .split-image {
+            flex: 1;
+        }
+
+        .split-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Process Steps */
+        .process-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .process-list li {
+            background: rgba(6, 182, 212, 0.08);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-left: 4px solid #06b6d4;
+            border-radius: 0 6px 6px 0;
+            transition: all 0.3s ease;
+            color: #cbd5e1;
+        }
+
+        .process-list li:hover {
+            transform: translateX(4px);
+            background: rgba(6, 182, 212, 0.15);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        .process-list li strong {
+            color: #06b6d4;
+            display: block;
+        }
+
+        /* Credibility Section */
+        .credibility {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .credibility h2 {
+            color: var(--white);
+        }
+
+        .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+        .card {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(26, 31, 58, 0.8);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .card p {
+            color: #cbd5e1;
+        }
+
+        .light-card {
+    background: white;
+    color: #334155;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+}
+
+        /* New University Logo Styles */
+        .uni-logo {
+            height: 50px;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            /* Optional: Adds a subtle white backing if you are using dark logos on this dark navy background */
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .card h3 {
+            color: #06b6d4;
+            font-size: 1.2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-card) 0%, rgba(6, 182, 212, 0.08) 50%, var(--dark-bg) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(6, 182, 212, 0.2);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(6, 182, 212, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section > .container > p {
+            color: #cbd5e1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .waitlist-form {
+            margin-top: 40px;
+            background: rgba(26, 31, 58, 0.8);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 920px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .waitlist-form:focus-within {
+            background: rgba(26, 31, 58, 0.95);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            background-color: rgba(15, 23, 42, 0.8);
+            padding: 14px 16px;
+            font-size: 1rem;
+            color: #cbd5e1;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+            background-color: rgba(15, 23, 42, 0.95);
+            color: #ffffff;
+        }
+
+        .form-control::placeholder {
+            color: rgba(203, 213, 225, 0.5);
+        }
+
+        .waitlist-form label {
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+
+        .form-status {
+            color: #cbd5e1;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .form-status.success {
+            color: #84cc16;
+        }
+
+        .form-status.error {
+            color: #f87171;
+        }
+
+        .btn[type="submit"] {
+            min-width: 240px;
+            text-align: center;
+        }
+
+        /* Mission Catalog Cards */
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.mission-card {
+    background: rgba(26, 31, 58, 0.7);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid rgba(6, 182, 212, 0.2);
+}
+
+.mission-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(6, 182, 212, 0.25);
+    border-color: rgba(6, 182, 212, 0.6);
+    background: rgba(26, 31, 58, 0.9);
+}
+
+.mission-card:hover .mission-card img {
+    filter: brightness(1.15);
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.mission-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.mission-content {
+    padding: 24px;
+}
+
+.mission-content h3 {
+    margin-bottom: 12px;
+    color: #06b6d4;
+    font-size: 1.2rem;
+}
+
+.mission-content p {
+    margin-bottom: 0;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .hero-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(6, 182, 212, 0.12);
+            color: #cbd5e1;
+            padding: 10px 16px;
+            border-radius: 999px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .pipeline-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.18);
+            padding: 28px;
+            border-radius: 18px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .pipeline-card:hover {
+            transform: translateY(-6px);
+            background: rgba(6, 182, 212, 0.08);
+        }
+
+        .pipeline-card h3 {
+            color: #06b6d4;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-card p {
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .avatar-section {
+            padding: 80px 0;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            align-items: center;
+        }
+
+        .avatar-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.18);
+            border-radius: 18px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .avatar-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .trust-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.18);
+            border-radius: 18px;
+            padding: 26px;
+            min-height: 220px;
+        }
+
+        .trust-card h3 {
+            color: #06b6d4;
+            margin-bottom: 16px;
+        }
+
+        .trust-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .feature-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .feature-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.16);
+            color: #cbd5e1;
+            border-radius: 999px;
+            padding: 10px 18px;
+        }
+
+        .real-mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .real-mission-card {
+            background: rgba(26, 31, 58, 0.75);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .real-mission-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .real-mission-copy {
+            padding: 24px;
+        }
+
+        .real-mission-copy h3 {
+            color: #06b6d4;
+            margin-bottom: 12px;
+        }
+
+        .real-mission-copy p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: #64748b;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .hero, .split-section, .split-section:nth-child(even) {
+                flex-direction: column;
+                padding: 40px 0;
+            }
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .split-section {
+                gap: 30px;
+            }
+            
+            .cta-section {
+                padding: 60px 0;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo">Learn<span>SMTH</span></div>
+            <nav class="nav-links">
+                <a href="#pipeline">How it works</a>
+                <a href="#missions">Missions</a>
+                <a href="#inside-mission">Inside a Mission</a>
+                <a href="#waitlist">Book a Demo</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <div class="hero-text">
+            <span class="hero-highlight">4-tier mission learning for apartment communities</span>
+            <h1>Where kids build real-world technology,<br>not just memorize formulas.</h1>
+            <p>LearnSMTH turns apartment clubhouses into community innovation labs for Grades 3–6, using identity-based learning, story-led missions, and parent-safe outcomes.</p>
+            <div class="feature-highlight">
+                <span class="feature-pill">Tech Titans & Visionaries</span>
+                <span class="feature-pill">Flood Alert + Smart Greenhouse</span>
+                <span class="feature-pill">Parent trust & credibility built-in</span>
+            </div>
+            <div class="button-group">
+                <a href="#pipeline" class="btn btn-primary">See the Learning Pipeline</a>
+                <a href="#waitlist" class="btn btn-secondary">Book a Community Demo</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="Images/KidsworkingonthePCB.png" alt="Children building an electronics kit in a community clubhouse">
+        </div>
+    </section>
+
+    <section id="pipeline" class="container" style="padding:80px 0;">
+        <div style="text-align:center; max-width:920px; margin:0 auto 40px;">
+            <h2>The LearnSMTH Learning Pipeline</h2>
+            <p>Our 4-tier strategy turns every mission into a complete learning journey: from curiosity to design, build, test and confidence.</p>
+        </div>
+        <div class="pipeline-grid">
+            <div class="pipeline-card">
+                <h3>1. Discover</h3>
+                <p>Start with a real challenge like flood alert systems or greenhouse automation so students understand why science matters.</p>
+            </div>
+            <div class="pipeline-card">
+                <h3>2. Design</h3>
+                <p>Use story-driven blueprints and Tech Titans avatars to help students choose roles, sketch solutions, and test ideas together.</p>
+            </div>
+            <div class="pipeline-card">
+                <h3>3. Build</h3>
+                <p>Every child assembles their own low-voltage kit, learns circuit logic, and sees their idea come alive in a real mission scenario.</p>
+            </div>
+            <div class="pipeline-card">
+                <h3>4. Share</h3>
+                <p>Students present their working project, reflect on learning, and own a stronger identity as a young problem-solver.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="avatar-section container">
+        <div style="text-align:center; max-width:920px; margin:0 auto 40px;">
+            <h2>Tech Titans & Visionaries</h2>
+            <p>Our mission guides and learner avatars make STEM feel meaningful, memorable and rooted in systems thinking.</p>
+        </div>
+        <div class="avatar-grid">
+            <div class="avatar-card">
+                <img src="Images/TechTitans Avatar V2.png" alt="Tech Titans learning avatars">
+                <p>Meet the Tech Titans: a world of STEM heroes who inspire curiosity, collaboration and problem solving.</p>
+            </div>
+            <div class="avatar-card">
+                <img src="Images/The Innovators Grade 9-10 avatars.png" alt="Visionaries learning avatars">
+                <p>Visionary avatars help learners see themselves as future engineers, designers and changemakers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="missions" class="container" style="padding:80px 0;">
+        <div style="text-align:center; max-width:920px; margin:0 auto 40px;">
+            <h2>Mission Showcase</h2>
+            <p>Designed for apartment families, our flagship missions are built around meaningful systems: community safety, sustainability, and smart living.</p>
+        </div>
+        <div class="real-mission-grid">
+            <div class="real-mission-card">
+                <img src="Images/Tech Titans Mission Flood alert system.png" alt="Tech Titans Flood Alert mission">
+                <div class="real-mission-copy">
+                    <h3>Flood Alert Mission</h3>
+                    <p>Students build water-level sensors, alert circuits, and a community warning system inspired by real Chennai monsoon challenges.</p>
+                </div>
+            </div>
+            <div class="real-mission-card">
+                <img src="Images/Tech Titans Mission Smart Green house.png" alt="Tech Titans Smart Greenhouse mission">
+                <div class="real-mission-copy">
+                    <h3>Smart Greenhouse Mission</h3>
+                    <p>Kids design automated plant-care systems that monitor moisture, light and temperature to keep a greenhouse thriving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Case: SRM Pitch Deck -->
+    <section class="container" style="padding:40px 0;">
+        <div class="container" style="text-align:center;">
+            <h2 style="color: #ffffff;">Real Mission Blueprint</h2>
+            <p style="color:#cbd5e1; max-width:800px; margin:0 auto 20px;">Explore a full example of how we convert a real-world news event into an integrated learning module — activities, labs, storytelling, and assessment.</p>
+            <a href="SRMPitch.html" class="btn btn-secondary" style="margin-top:10px;" title="Open SRM Pitch Deck (use case)">Open SRM Pitch Deck</a>
+        </div>
+    </section>
+
+    <section class="split-section container">
+        <div class="split-content">
+            <h2>Real Engineering.<br><span style="color: var(--orange);">Disguised as Adventure.</span></h2>
+            <p>We bring expert-led, interactive STEM workshops directly to your residential community. Instead of reading textbooks, students learn Physics and Math by solving high-stakes stories.</p>
+            <ul class="process-list">
+                <li><strong>1. The Mission Brief</strong> Every session begins with a story—like building a laser-tripwire alarm to protect a vault.</li>
+                <li><strong>2. The Blueprint</strong> Students collaborate on breadboards to understand the core logic.</li>
+                <li><strong>3. The Build</strong> Each child gets their own custom "Learn Something" PCB to assemble and wire.</li>
+                <li><strong>4. The Take-Home</strong> The learning stays. Students take their functioning gadgets home to display and explain.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="Images/Kidsincommunityhallwithparents.png" alt="Child holding custom built electronics project">
+        </div>
+    </section>
+
+<section id="choose-mission" class="split-section container">
+<div class="split-content">
+
+    <h2 style="text-align:center;">Choose Your Next Mission</h2>
+
+    <p style="text-align:center; max-width:800px; margin:0 auto 40px auto;">
+        Every workshop is built like an immersive engineering adventure where children solve
+        real-world problems using electronics, creativity, teamwork, and scientific thinking.
+    </p>
+
+    <div class="mission-grid">
+
+        <!-- Spy Mission -->
+        <div class="mission-card">
+            <img src="Images/spy-mission.jpg" alt="Spy Mission">
+
+            <div class="mission-content">
+                <h3>🚨 Spy & Security Missions</h3>
+
+                <p>
+                    Build laser alarms, secret vault protection systems,
+                    motion detectors, and intruder alerts while learning circuits and sensors.
+                </p>
+            </div>
+        </div>
+
+        <!-- Eco Mission -->
+        <div class="mission-card">
+            <img src="Images/eco-mission.jpg" alt="Eco Mission">
+
+            <div class="mission-content">
+                <h3>🌱 Eco & Nature Missions</h3>
+
+                <p>
+                    Create smart plant monitors, rain detectors,
+                    automatic garden lights, and water-saving systems inspired by environmental science.
+                </p>
+            </div>
+        </div>
+
+        <!-- Smart City -->
+        <div class="mission-card">
+            <img src="Images/city-mission.jpg" alt="Smart City Mission">
+
+            <div class="mission-content">
+                <h3>🚗 Smart City Missions</h3>
+
+                <p>
+                    Design traffic control systems, emergency vehicle alerts,
+                    and city automation projects using timing and logic systems.
+                </p>
+            </div>
+        </div>
+
+        <!-- Space -->
+        <div class="mission-card">
+            <img src="Images/space-mission.jpg" alt="Space Mission">
+
+            <div class="mission-content">
+                <h3>🚀 Space & Exploration Missions</h3>
+
+                <p>
+                    Simulate satellite systems, rover communication,
+                    moon-base alarms, and astronaut survival gadgets.
+                </p>
+            </div>
+        </div>
+
+        <!-- Health -->
+        <div class="mission-card">
+            <img src="Images/health-mission.jpg" alt="Health Mission">
+
+            <div class="mission-content">
+                <h3>🏥 Health & Human Body Missions</h3>
+
+                <p>
+                    Build pulse sensors, hydration alerts,
+                    reaction timers, and biomedical-inspired STEM projects.
+                </p>
+            </div>
+        </div>
+
+        <!-- Games -->
+        <div class="mission-card">
+            <img src="Images/games-mission.jpg" alt="Games Mission">
+
+            <div class="mission-content">
+                <h3>🎮 Games & Challenge Missions</h3>
+
+                <p>
+                    Create reaction games, buzz-wire challenges,
+                    racing timers, and multiplayer engineering competitions.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+    <section id="inside-mission" class="split-section container">
+    <div class="split-image">
+        <img src="Images/KidsworkingonthePCB.png" alt="Students collaborating during workshop">
+    </div>
+
+    <div class="split-content">
+        <h2>Inside a Real Mission</h2>
+        <p>Every "LearnSMTH" session is designed like a cinematic engineering adventure where children learn by building, experimenting, collaborating, and presenting.</p>
+        <p>We use identity-based learning so each student feels like a Junior Innovator, Tech Titan, or Community Builder — not just a pupil at a class.</p>
+
+        <ul class="process-list">
+            <li>
+                <strong>1. Mission Briefing</strong>
+                Students receive a high-stakes challenge like protecting a community from flooding or automating a greenhouse.
+            </li>
+
+            <li>
+                <strong>2. Discovery Through Play</strong>
+                Children explore sensors, LEDs, buzzers, motors, and circuits through guided experimentation.
+            </li>
+
+            <li>
+                <strong>3. Team Prototype Build</strong>
+                Small teams collaborate on breadboards to test ideas, troubleshoot problems, and improve designs.
+            </li>
+
+            <li>
+                <strong>4. Individual PCB Build</strong>
+                Every student assembles their own custom STEM project using beginner-friendly PCB kits.
+            </li>
+
+            <li>
+                <strong>5. Mission Test Arena</strong>
+                Students test their creations in real mission scenarios filled with excitement and friendly competition.
+            </li>
+
+            <li>
+                <strong>6. Show & Tell Presentation</strong>
+                Each child explains their project, reinforcing learning while building communication confidence.
+            </li>
+        </ul>
+    </div>
+</section>
+    <section class="container" style="padding:80px 0;">
+        <div style="text-align:center; max-width:920px; margin:0 auto 40px;">
+            <h2>Trusted by Parents, Built for Community</h2>
+            <p>We design every mission to reassure busy families with visible outcomes, safe materials, and transparent skill progress.</p>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <h3>Clear Learning Outcomes</h3>
+                <p>Every workshop shows what your child learns in science, circuits, systems thinking and communication — not just what they built.</p>
+            </div>
+            <div class="trust-card">
+                <h3>Parent-Friendly Delivery</h3>
+                <p>We run sessions inside apartment clubhouses so your family saves time, avoids traffic, and still gets premium STEM learning.</p>
+            </div>
+            <div class="trust-card">
+                <h3>Visible Confidence Gains</h3>
+                <p>Children leave with a working project, a story to tell, and a stronger identity as a young maker who can solve real problems.</p>
+            </div>
+        </div>
+    </section>
+    <section class="split-section container">
+        <div class="split-content">
+            <h2>Premium Education.<br><span style="color: var(--orange);">Zero Hassle.</span></h2>
+            <p>We know you want the best for your child, but driving through evening traffic to a distant tuition center is exhausting. "Learn Something" operates exactly where you need us.</p>
+            <ul class="process-list">
+                <li><strong>Unmatched Convenience</strong> We operate exclusively in residential community clubhouses. High-quality learning is just an elevator ride away.</li>
+                <li><strong>Visible Outcomes</strong> No more asking, "What did you learn today?" Your child walks in holding a working piece of technology.</li>
+                <li><strong>Presentation Confidence</strong> We record your child presenting their final build. Watch their public speaking and technical communication skills grow.</li>
+                <li><strong>100% Safe</strong> All our kits use low-voltage components designed specifically for young hands.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="Images/studentstogoKit.png" alt="Mother taking video of children completing a STEM project in a clubhouse">
+        </div>
+    </section>
+
+    
+    
+    <section class="split-section container">
+        <div class="container">
+            <h2>Backed by Science.<br><span style="color: var(--orange);">Proven to Work.</span></h2>
+            <p style="color: #cbd5e1; max-width: 700px; margin: 0 auto 40px auto; font-size: 1.1rem;">Our curriculum design is grounded in Indiana University cognitive neuroscience research showing that self-generated action changes how children learn, recognize symbols, and build math understanding.</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <img src="Images/indiana-logo.png" alt="Indiana University Logo" class="uni-logo">
+                    <h3>Action Shapes Learning</h3>
+                    <p><strong>Indiana University</strong> research from Karin H. James shows that self-generated motor actions create richer learning episodes and reshape brain systems for perception, symbol recognition, reading, and math.</p>
+                    <a href="https://psych.indiana.edu/directory/faculty/james-harman-karin.html"
+       target="_blank"
+       class="btn btn-secondary"
+       style="margin-top:20px;">
+       Read More
+    </a>
+                </div>
+                <div class="card">
+                    <img src="Images/stanford-logo.png" alt="Stanford University Logo" class="uni-logo">
+                    <h3>Educational Neuroscience</h3>
+                    <p><strong>Stanford</strong> research from the Educational Neuroscience Initiative shows that middle school students gain stronger brain-based learning when they engage in real science experiences with guided mentors.</p>
+                    <a href="https://ed.stanford.edu/news/getting-head-start"
+       target="_blank"
+       class="btn btn-secondary"
+       style="margin-top:20px;">
+       Read More
+    </a>
+                </div>
+                <div class="card">
+                    <img src="Images/harvard-logo.png" alt="Harvard University Logo" class="uni-logo">
+                    <h3>Brain Architecture</h3>
+                    <p><strong>Harvard</strong> research shows that strong learning foundations are built through active, high-quality experiences and supportive environments that shape the brain’s architecture.</p>
+                    <a href="https://developingchild.harvard.edu/resource-guides/guide-brain-architecture/"
+       target="_blank"
+       class="btn btn-secondary"
+       style="margin-top:20px;">
+       Read More
+    </a>
+                </div>
+                <div class="card">
+    <img src="Images/mit-logo.png" alt="MIT Media Lab Logo" class="uni-logo">
+
+    <h3>Constructionism</h3>
+
+    <p>
+        <strong>MIT Media Lab</strong> research pioneered the idea that children learn
+        best when they actively build meaningful physical creations and solve problems through experimentation.
+    </p>
+
+    <a href="https://www.media.mit.edu/projects/constructionism/overview/" target="_blank" class="btn btn-secondary" style="margin-top:20px;">
+        Read More
+    </a>
+</div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="waitlist" class="cta-section">
+        <div class="container">
+            <h2>Ready for a mission pilot in your community?</h2>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto;">Tell us your apartment area and community size. We will plan a demo mission that shows your child how STEM becomes real, fun and purposeful.</p>
+            <form id="waitlist-form" class="waitlist-form" autocomplete="off">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="location">Preferred community area</label>
+                        <select id="location" name="location" class="form-control" required>
+                            <option value="">Select an area</option>
+                            <option value="OMR">OMR</option>
+                            <option value="Velachery">Velachery</option>
+                            <option value="Pallavaram Radial Road Apartments">Pallavaram Radial Road Apartments</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="apartmentName">Apartment name</label>
+                        <input id="apartmentName" name="apartmentName" class="form-control" type="text" placeholder="Apartment / community name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactInfo">Contact info</label>
+                        <input id="contactInfo" name="contactInfo" class="form-control" type="text" placeholder="Phone or email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedStudents">Expected number of students</label>
+                        <input id="expectedStudents" name="expectedStudents" class="form-control" type="number" min="1" placeholder="e.g. 10" required>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="comments">Comments</label>
+                        <textarea id="comments" name="comments" class="form-control" rows="4" placeholder="Basic details or questions"></textarea>
+                    </div>
+                </div>
+                <div class="button-group" style="justify-content: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Submit Waitlist Request</button>
+                </div>
+                <p id="form-status" class="form-status" role="status"></p>
+            </form>
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 LearnSMTH. Bridging the gap between knowing and doing.</p>
+            <p><small>Visit us at <a href="https://LearnSMTH.co.in" style="color:#06b6d4; text-decoration:none;">LearnSMTH.co.in</a></small></p>
+            <p><small>Serving Apartment Communities across Chennai</small></p>
+        </div>
+    </footer>
+
+    <script>
+        var waitlistForm = document.getElementById('waitlist-form');
+        var locationField = waitlistForm.location;
+        var commentsField = waitlistForm.comments;
+        var commentsLabel = document.querySelector('label[for="comments"]');
+
+        locationField.addEventListener('change', function() {
+            if (locationField.value === 'Other') {
+                commentsField.required = true;
+                commentsLabel.textContent = 'Comments / full address';
+                commentsField.placeholder = 'Please provide your full address';
+            } else {
+                commentsField.required = false;
+                commentsLabel.textContent = 'Comments';
+                commentsField.placeholder = 'Basic details or questions';
+            }
+        });
+
+        waitlistForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var form = event.target;
+            var data = {
+                submittedAt: new Date().toISOString(),
+                location: form.location.value,
+                apartmentName: form.apartmentName.value.trim(),
+                contactInfo: form.contactInfo.value.trim(),
+                expectedStudents: form.expectedStudents.value,
+                comments: form.comments.value.trim()
+            };
+
+            var isOther = data.location === 'Other';
+            var isCommentsRequired = isOther;
+
+            if (!data.location || !data.apartmentName || !data.contactInfo || !data.expectedStudents || (isCommentsRequired && !data.comments)) {
+                if (isCommentsRequired && !data.comments) {
+                    setStatus('Please provide the full address in comments when selecting Other.', 'error');
+                } else {
+                    setStatus('Please complete all required fields.', 'error');
+                }
+                return;
+            }
+
+            var json = JSON.stringify(data, null, 2);
+            var blob = new Blob([json], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'learn-something-waitlist-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            setStatus('Your waitlist request is ready to save. A JSON file has been downloaded for your records.', 'success');
+            form.reset();
+        });
+
+        function setStatus(message, type) {
+            var status = document.getElementById('form-status');
+            status.textContent = message;
+            status.className = 'form-status ' + type;
+        }
+    </script>
+</body>
+</html>

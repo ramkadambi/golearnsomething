@@ -1,0 +1,26 @@
+Track 1: The In-Person Workshop (The Observational Rubric)
+In a physical clubhouse, you cannot easily track a student's eye movements or reading speed. The assessment here must rely entirely on the instructor's observation of the final output.
+
+Execution Flow (The 3-Hour Workshop):
+
+The Brief & Build (120 Minutes): Students form their Tribe, pick their capabilities, and execute the hardware build (e.g., the Smart Plant Alert). The instructor (Mentor K) acts purely as a facilitator, not a lecturer.
+
+The Pitch (40 Minutes): Teams stand up to present their artifact.
+
+The Stealth Scoring (Background): While the students present, the instructor uses a simple tablet app to log scores on the 3-Dimensional Rubric (Artifact Execution, Real-World Synthesis, Q&A Resilience).
+
+The Output: This observational data is synced to the central platform, generating the video portfolio and the "Confidence & Capability Matrix" for the parents to share.
+
+Track 2: The Monthly Subscription (The Digital Telemetry Engine)
+This is where your AI-driven moat is truly built. For the at-home assignments, the student interacts directly with the LearnSMTH digital platform, allowing you to capture high-resolution behavioral telemetry.
+
+Execution Flow (The Monthly Digital Assignment):
+
+Multi-Modal Delivery: The platform presents the monthly mission. The student chooses their starting point: the visual comic, the audio brief, the fast-paced video, or the raw schematic.
+
+Event-Driven Telemetry: Every click, pause, and skip is tracked. If a student breezes through the video but spends 20 minutes repeatedly clicking the visual circuit diagram before taking the end-of-mission quiz, the system logs this preference.
+
+Adaptive Routing: For the next month's assignment, the platform dynamically reorders the content, prioritizing the visual schematics first to match their proven learning pathway, instantly reducing cognitive friction.
+
+Building the Architecture (The Technical Moat)
+To handle the real-time data from the monthly subscriptions without lag, the backend architecture requires a robust, scalable foundation. Leveraging an event-driven setup using Kafka to stream this real-time clickstream data, processed by a solid backend like Java 17, and stored in flexible JSON document structures within MongoDB is an ideal way to dynamically map these cognitive profiles. Furthermore, leveraging AI-assisted development platforms like Cursor, paired with advanced LLMs, will drastically accelerate the coding of this telemetry engine and the generation of the adaptive mission pathways.
