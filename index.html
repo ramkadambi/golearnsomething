@@ -1053,18 +1053,18 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <span class="hero-badge">
-                    <i class="fa-solid fa-sparkles"></i> Reimagining STEM for Grades 3–6
+                    <i class="fa-solid fa-sparkles"></i> Learn to learn with confidence by doing STEM projects
                 </span>
                 <h1 class="hero-title">
-                    Your child doesn't need another class to <span class="gradient-text-teal">study</span>.<br>
-                    They need an adventure to learn how to <span class="gradient-text-orange">learn</span>.
+                    Not just reimagining STEM for Grades 3–6.<br>
+                    We help children <span class="gradient-text-teal">learn to learn</span> with confidence by doing <span class="gradient-text-orange">hands-on STEM projects</span>.
                 </h1>
                 <p class="hero-desc">
                     LearnSMTH transforms local residential clubhouses into innovation labs where kids solve story-driven
                     engineering challenges, build custom hardware, and gain lifelong learning confidence.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#pilot-request" class="btn btn-primary">Book a Community Demo</a>
+                    <a href="#pilot-request" class="btn btn-primary">Express Interest on WhatsApp</a>
                     <a href="#how-it-works" class="btn btn-secondary">See How it Works</a>
                 </div>
                 <div class="hero-metrics">
@@ -1276,7 +1276,7 @@
                         <li><i class="fa-solid fa-square-check"></i> <strong>Alert Beacon:</strong> Active LED & Buzzer
                             warnings.</li>
                     </ul>
-                    <a href="#pilot-request" class="btn btn-primary">Book This Workshop Demo</a>
+                    <a href="#pilot-request" class="btn btn-primary">Express Interest on WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -1377,61 +1377,27 @@
         </div>
     </section>
 
-    <!-- Section: Waitlist Form -->
+    <!-- Section: Pilot Inquiry -->
     <section id="pilot-request" class="waitlist-section">
         <div class="container waitlist-container">
             <div class="waitlist-info">
                 <h2>Bring LearnSMTH to Your Apartment Community</h2>
-                <p>We are running exclusive localized pilots across Chennai's premier residential developments. If you
-                    want to give your children a reason to love STEM again, request a demo workshop for your clubhouse.
-                </p>
+                <p>We are currently offering this pilot experience to residential complexes in OMR, and we typically begin with a minimum of 10 children to kickstart the workshop in a meaningful way.</p>
                 <ul>
                     <li><i class="fa-solid fa-circle-check"></i> Minimum cohort: 10 students (Grades 3–6)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Standard workshop duration: 3 Hours</li>
-                    <li><i class="fa-solid fa-circle-check"></i> All low-voltage, 100% safe physical kits provided</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Final PCB builds and pitch video included</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Workshop duration: 3 hours</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Pricing: ₹1,499 per student, including the take-home PCB</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Safe, low-voltage kits and guided facilitation included</li>
                 </ul>
             </div>
 
             <div class="waitlist-card">
-                <form id="waitlist-form" autocomplete="off">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="location">Preferred Chennai Area</label>
-                            <select id="location" name="location" class="form-control" required>
-                                <option value="">Select an area</option>
-                                <option value="OMR">OMR / IT Corridor</option>
-                                <option value="Velachery">Velachery</option>
-                                <option value="Pallavaram Radial Road">Pallavaram Radial Road</option>
-                                <option value="Other">Other Area</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="apartmentName">Apartment Name</label>
-                            <input id="apartmentName" name="apartmentName" class="form-control" type="text"
-                                placeholder="e.g., DLF Gardencity" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactInfo">Contact Info</label>
-                            <input id="contactInfo" name="contactInfo" class="form-control" type="text"
-                                placeholder="Phone or Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="expectedStudents">Expected Kids Size</label>
-                            <input id="expectedStudents" name="expectedStudents" class="form-control" type="number"
-                                min="5" placeholder="Min 5 kids" required>
-                        </div>
-                        <div class="form-group full">
-                            <label for="comments" id="comments-label">Comments / Questions</label>
-                            <textarea id="comments" name="comments" class="form-control" rows="3"
-                                placeholder="Tell us about your community space or questions"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        Submit Pilot Application <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <div id="form-status" class="form-status"></div>
-                </form>
+                <h3>Express your interest</h3>
+                <p>Please send a WhatsApp message to <strong>+91 8825558423</strong> with your community or apartment name and the contact person’s name.</p>
+                <p>We will follow up with the next available pilot slot and workshop details.</p>
+                <a href="https://wa.me/918825558423" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    WhatsApp Us <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -1458,6 +1424,7 @@
                     <ul>
                         <li><a href="https://LearnSMTH.co.in">LearnSMTH.co.in</a></li>
                         <li>Email: hello@learnsmth.co.in</li>
+                        <li>WhatsApp: +91 8825558423</li>
                         <li>Chennai, Tamil Nadu</li>
                     </ul>
                 </div>
@@ -1468,85 +1435,9 @@
             </div>
         </div>
     </footer>
+</body>
 
-    <!-- Form Logic -->
-    <script>
-        const waitlistForm = document.getElementById('waitlist-form');
-        const locationField = waitlistForm.location;
-        const commentsField = waitlistForm.comments;
-        const commentsLabel = document.getElementById('comments-label');
-
-        // Dynamic form validation labels
-        locationField.addEventListener('change', function () {
-            if (locationField.value === 'Other') {
-                commentsField.required = true;
-                commentsLabel.innerHTML = 'Full Address / Location Details <span style="color: var(--red);">*</span>';
-                commentsField.placeholder = 'Please provide your full area and address details here.';
-            } else {
-                commentsField.required = false;
-                commentsLabel.innerHTML = 'Comments / Questions';
-                commentsField.placeholder = 'Tell us about your community space or questions';
-            }
-        });
-
-        // Submit Logic (JSON Export download)
-        waitlistForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const form = event.target;
-            const statusDiv = document.getElementById('form-status');
-
-            const data = {
-                submittedAt: new Date().toISOString(),
-                location: form.location.value,
-                apartmentName: form.apartmentName.value.trim(),
-                contactInfo: form.contactInfo.value.trim(),
-                expectedStudents: form.expectedStudents.value,
-                comments: form.comments.value.trim()
-            };
-
-            const isOther = data.location === 'Other';
-            if (isOther && !data.comments) {
-                statusDiv.textContent = 'Please provide location details in comments when selecting Other Area.';
-                statusDiv.className = 'form-status error';
-                return;
-            }
-
-            try {
-                const json = JSON.stringify(data, null, 2);
-                const blob = new Blob([json], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'learnsmth-pilot-request-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-
-                // Format WhatsApp message
-                const whatsappText = `*New Pilot Request for LearnSMTH* 🚀\n\n` +
-                    `Hello! I would like to request a STEM Workshop Pilot for my apartment community. Here are the details:\n\n` +
-                    `📍 *Preferred Area:* ${data.location}\n` +
-                    `🏢 *Apartment Name:* ${data.apartmentName}\n` +
-                    `📞 *Contact Info:* ${data.contactInfo}\n` +
-                    `👥 *Expected Kids Size:* ${data.expectedStudents}\n` +
-                    `💬 *Comments / Address:* ${data.comments || 'None'}\n\n` +
-                    `*Submitted At:* ${data.submittedAt}`;
-
-                // Open WhatsApp Click-to-Chat (Replace 919999999999 with your actual business number including country code)
-                const businessNumber = '919500041219';
-                const whatsappUrl = `https://api.whatsapp.com/send?phone=${businessNumber}&text=${encodeURIComponent(whatsappText)}`;
-                window.open(whatsappUrl, '_blank');
-
-                statusDiv.textContent = 'Thank you! Your request JSON was downloaded and a WhatsApp redirection has been opened to submit your details.';
-                statusDiv.className = 'form-status success';
-                form.reset();
-            } catch (err) {
-                statusDiv.textContent = 'Error processing form. Please check inputs and try again.';
-                statusDiv.className = 'form-status error';
-            }
-        });
-    </script>
+</html>
 </body>
 
 </html>
