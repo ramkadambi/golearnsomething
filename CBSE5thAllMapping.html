@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | Grade 5 Integrated Curriculum</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Deep Blue */
+            --secondary: #10B981; /* Emerald Green - EVS */
+            --accent: #F59E0B; /* Amber - Problem */
+            --math-color: #8B5CF6; /* Purple - Math */
+            --eng-color: #E11D48; /* Rose - English */
+            --bg-light: #F3F4F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Differentiator Section */
+        .differentiator {
+            background: var(--white);
+            border-left: 5px solid var(--eng-color);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .differentiator h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .diff-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .diff-box h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diff-box.highlight {
+            background: #FFF1F2;
+            border: 1px solid #FECDD3;
+        }
+
+        .diff-box.highlight h3 {
+            color: var(--eng-color);
+        }
+
+        .features-list {
+            list-style-type: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .badge-evs { background: var(--secondary); }
+        .badge-math { background: var(--math-color); }
+        .badge-eng { background: var(--eng-color); }
+        .badge-build { background: var(--primary); }
+
+        /* Mission Map Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .mission-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .unit-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--text-dark);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            color: var(--white);
+            line-height: 1.3;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .problem-statement {
+            background: #FEF3C7;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .problem-statement strong {
+            display: block;
+            color: #B45309;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .build-row {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .build-row strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .subject-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #E5E7EB;
+        }
+        
+        .subject-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .subject-row strong {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subject-row strong::before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .evs-title { color: var(--secondary); }
+        .evs-title::before { background-color: var(--secondary); }
+        
+        .math-title { color: var(--math-color); }
+        .math-title::before { background-color: var(--math-color); }
+        
+        .eng-title { color: var(--eng-color); }
+        .eng-title::before { background-color: var(--eng-color); }
+
+        .chapter-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .chapter-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .differentiator-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LearnSMTH</h1>
+        <p>CBSE Grade 5: The 360° Integrated Mission Map</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- The Core Differentiator -->
+        <section class="differentiator">
+            <h2>The Grade 5 Differentiator: Adding Voice to Science</h2>
+            <div class="differentiator-grid">
+                <div class="diff-box">
+                    <h3>The Standard Approach</h3>
+                    <p>Students build a science model, solve arbitrary math problems, and write unrelated essays in English class. Subjects never talk to each other.</p>
+                </div>
+                <div class="diff-box highlight">
+                    <h3>The LearnSMTH 360° Approach</h3>
+                    <p>Students don't just build a device. They <strong>quantify the data (Math)</strong>, <strong>analyze the societal impact (EVS)</strong>, and <strong>communicate their findings (English)</strong>. We transform a "science project" into a full-scale professional challenge.</p>
+                </div>
+            </div>
+            
+            <ul class="features-list">
+                <li class="badge-evs">100% NCERT EVS (Looking Around)</li>
+                <li class="badge-math">100% NCERT Math-Magic</li>
+                <li class="badge-eng">100% NCERT English (Marigold)</li>
+                <li class="badge-build">1 Major Hands-On Build / Month</li>
+            </ul>
+        </section>
+
+        <h2 class="section-title">The 10-Mission Curriculum</h2>
+        
+        <section class="mission-grid">
+            
+            <!-- Mission 01 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 01</span>
+                    <h3>01. The Ocean Economist</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do local fishermen navigate the seas, track their catch, and run a sustainable business?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Magnetic compass navigation kit & boat buoyancy model.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Super Senses</span>
+                        <span class="chapter-desc">How marine animals navigate and communicate under the sea.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">The Fish Tale</span>
+                        <span class="chapter-desc">Large numbers, place value, and basic economics (profit/loss of catch).</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Teamwork</span>
+                        <span class="chapter-desc">Collaborative writing: Planning the roles of a fishing crew.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 02 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 02</span>
+                    <h3>02. The Heritage Mapmaker</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we map ancient forts and ruins so modern tourists don't get lost?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        3D architectural diorama and scaled grid-mapping tools.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Walls Tell Stories</span>
+                        <span class="chapter-desc">Historical monuments, ancient architecture, and heritage preservation.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Mapping Your Way</span>
+                        <span class="chapter-desc">Scaling, grids, map reading, and calculating distances.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Robinson Crusoe</span>
+                        <span class="chapter-desc">Descriptive writing: Creating a travelogue for a newly discovered ruin.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 03 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 03</span>
+                    <h3>03. Food Rescue Chemist</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we prevent tons of crops from spoiling during hot summers without electricity?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Passive solar dehydrator and natural preservation kit.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Mangoes Round the Year & Tasting/Digesting</span>
+                        <span class="chapter-desc">Food preservation techniques and human digestion.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Parts and Wholes</span>
+                        <span class="chapter-desc">Using fractions to mix precise preservation recipes (salt/sugar ratios).</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Wonderful Waste</span>
+                        <span class="chapter-desc">Instructional writing: Writing clear, step-by-step recipes.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 04 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 04</span>
+                    <h3>04. Outbreak Detective</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do public health officials track and prevent mosquito-borne illnesses during monsoons?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Mosquito lifecycle observation trap and data tracking board.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">A Treat for Mosquitoes</span>
+                        <span class="chapter-desc">Vector-borne diseases, stagnant water, and blood testing basics.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Smart Charts</span>
+                        <span class="chapter-desc">Using tally marks and bar graphs to track outbreak data hot-spots.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">The Little Bully</span>
+                        <span class="chapter-desc">Persuasive writing: Designing impactful public health campaign posters.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 05 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 05</span>
+                    <h3>05. Disaster Relief Architect</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we rapidly design and deploy sturdy shelters after an earthquake?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Earthquake shake-table and structural geometry kit.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">When the Earth Shook</span>
+                        <span class="chapter-desc">Seismology, natural disasters, and emergency response.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Boxes and Sketches</span>
+                        <span class="chapter-desc">Translating 2D blueprints into 3D structural nets and perspectives.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Gulliver's Travels</span>
+                        <span class="chapter-desc">News reporting: Writing a factual emergency broadcast script.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 06 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 06</span>
+                    <h3>06. Zero-Gravity Engineer</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do you design living quarters and equipment for an international space station?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Centrifuge gravity simulator model and orbital mechanics rig.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Sunita in Space</span>
+                        <span class="chapter-desc">Gravity, vacuum, and surviving in low-earth orbit.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Tenths and Hundredths</span>
+                        <span class="chapter-desc">Using decimals for hyper-precise spacecraft measurements and mass.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Flying Together</span>
+                        <span class="chapter-desc">Journaling: Writing the daily logs of an extended space mission.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 07 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 07</span>
+                    <h3>07. The Smart Agronomist</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we maximize crop yield in a very small plot of land to feed a community?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Seed germination grid and micro-greenhouse model.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Seeds and Seeds</span>
+                        <span class="chapter-desc">Plant biology, seed dispersal, and modern vs traditional farming.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Be My Multiple, I'll be Your Factor</span>
+                        <span class="chapter-desc">Using factors and arrays to optimize crop planting layouts.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Who Will be Ningthou?</span>
+                        <span class="chapter-desc">Interviewing: Formulating questions for local farmers/community leaders.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 08 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 08</span>
+                    <h3>08. The Basecamp Leader</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do mountaineers calculate safe climbing paths and survive extreme cold?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Inclinometer (angle measurer) and lung-capacity testing gauge.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Up You Go! & Blow Hot, Blow Cold</span>
+                        <span class="chapter-desc">High altitude survival, oxygen depletion, and heat transfer.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Shapes and Angles</span>
+                        <span class="chapter-desc">Calculating safe climbing trajectories and structural tent angles.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Around the World</span>
+                        <span class="chapter-desc">Team Communication: Expressing empathy and leadership in writing.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 09 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 09</span>
+                    <h3>09. Energy Auditor</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How fast is our city running out of fossil fuels, and how do we switch to solar?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Solar panel surface area optimizer and basic energy circuit.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">What if it Finishes?</span>
+                        <span class="chapter-desc">Fossil fuel depletion, traffic pollution, and renewable energy.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Area and its Boundary</span>
+                        <span class="chapter-desc">Calculating the total roof space required for solar panel arrays.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Class Discussion</span>
+                        <span class="chapter-desc">Persuasive Debate: Structuring an argument for renewable energy adoption.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 10 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 10</span>
+                    <h3>10. Cultural Cryptographer</h3>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do different tribes and cultures use mathematics and geometry to tell stories?
+                    </div>
+                    <div class="build-row">
+                        <strong>Workshop Build</strong>
+                        Tessellation block-printing kit and geometric loom model.
+                    </div>
+                    
+                    <div class="subject-row">
+                        <strong class="evs-title">EVS (Science/Social)</strong>
+                        <span class="chapter-name">Whose Forests?</span>
+                        <span class="chapter-desc">Tribal cultures, forest conservation, and cultural heritage.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="math-title">Math</strong>
+                        <span class="chapter-name">Can You See the Pattern?</span>
+                        <span class="chapter-desc">Symmetry, reflections, and tessellations in traditional textiles.</span>
+                    </div>
+                    <div class="subject-row">
+                        <strong class="eng-title">English (Marigold)</strong>
+                        <span class="chapter-name">Malu Bhalu</span>
+                        <span class="chapter-desc">Creative Writing: Writing poetry to describe abstract geometric patterns.</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</body>
+</html>

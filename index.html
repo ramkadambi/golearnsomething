@@ -17,19 +17,19 @@
 
     <style>
         :root {
-            --paper: #fffaf2;
-            --paper-2: #f6efe3;
-            --ink: #182321;
-            --muted: #60706b;
-            --line: #ded4c4;
-            --teal: #0e8f88;
-            --teal-dark: #096861;
-            --coral: #ee6b4d;
-            --yellow: #f2b84b;
-            --green: #6aa84f;
-            --cream: #fff4dc;
+            --paper: #f5fbf7;
+            --paper-2: #e6f4ee;
+            --ink: #1d2f2b;
+            --muted: #516a62;
+            --line: #cdd7d1;
+            --teal: #16918d;
+            --teal-dark: #0f6d64;
+            --coral: #f16f53;
+            --yellow: #f4c86e;
+            --green: #6eac72;
+            --cream: #fbf6e8;
             --white: #ffffff;
-            --shadow: 0 24px 60px rgba(33, 41, 35, 0.14);
+            --shadow: 0 24px 60px rgba(29, 47, 43, 0.18);
             --font-display: "Outfit", "Segoe UI", sans-serif;
             --font-body: "Inter", "Segoe UI", sans-serif;
         }
@@ -463,6 +463,23 @@
             aspect-ratio: 1.25 / 1;
             object-fit: cover;
             width: 100%;
+            animation: floatImage 12s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            25% {
+                transform: translateY(-6px) scale(1.01);
+            }
+            50% {
+                transform: translateY(0) scale(1.005);
+            }
+            75% {
+                transform: translateY(-4px) scale(1.008);
+            }
         }
 
         .mini div {
@@ -749,7 +766,6 @@
     <header>
         <div class="container nav">
             <a href="#" class="brand" aria-label="LearnSMTH home">
-                <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
                 LearnSMTH
             </a>
             <nav class="nav-links" aria-label="Primary navigation">
@@ -1073,7 +1089,6 @@
             <div class="footer-grid">
                 <div>
                     <a href="#" class="brand">
-                        <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
                         LearnSMTH
                     </a>
                     <p>Hands-on STEM missions for curious children and connected apartment communities.</p>

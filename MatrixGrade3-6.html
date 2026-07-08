@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | The Spiral Curriculum (Grades 3-6)</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Deep Blue */
+            --secondary: #10B981; /* Emerald Green */
+            --accent: #F59E0B; /* Amber */
+            --math-color: #8B5CF6; /* Purple for Math */
+            --grade3: #3B82F6;
+            --grade4: #F43F5E;
+            --grade5: #06B6D4;
+            --grade6: #8B5CF6;
+            --bg-light: #F3F4F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Differentiator Section */
+        .differentiator {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .differentiator h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .diff-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .diff-box h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diff-box.highlight {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+        }
+
+        .diff-box.highlight h3 {
+            color: var(--primary);
+        }
+
+        .features-list {
+            list-style-type: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Mission Container */
+        .mission-container {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        .mission-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .mission-header h2 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .mission-header p.problem {
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Grade Grid */
+        .grade-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: #E5E7EB; /* Acts as border between columns */
+        }
+
+        .grade-col {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .grade-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #E5E7EB;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-title.g3 { color: var(--grade3); border-color: var(--grade3); }
+        .grade-title.g4 { color: var(--grade4); border-color: var(--grade4); }
+        .grade-title.g5 { color: var(--grade5); border-color: var(--grade5); }
+        .grade-title.g6 { color: var(--grade6); border-color: var(--grade6); }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .info-row strong {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+        
+        .info-row strong.sci-title { color: var(--secondary); }
+        .info-row strong.math-title { color: var(--math-color); }
+
+        .build-box {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            min-height: 80px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .tag.sci { background: #D1FAE5; color: #065F46; }
+        .tag.math { background: #EDE9FE; color: #5B21B6; }
+        
+        .chapter-context {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grade-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .grade-grid { grid-template-columns: 1fr; }
+            .differentiator-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LearnSMTH</h1>
+        <p>The Spiral Curriculum Matrix: Grades 3 to 6</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- The Core Differentiator -->
+        <section class="differentiator">
+            <h2>The Low-Floor, High-Ceiling Advantage</h2>
+            <div class="differentiator-grid">
+                <div class="diff-box">
+                    <h3>The Old Way: Logistical Nightmare</h3>
+                    <p>Building 48 completely different kits for 4 different grades creates inventory chaos, isolates siblings from each other, and fragments the brand narrative.</p>
+                </div>
+                <div class="diff-box highlight">
+                    <h3>The LearnSMTH Way: The Spiral Curriculum</h3>
+                    <p><strong>12 Core Missions across all ages.</strong> A Grade 3 student and a Grade 6 student work on the <em>exact same</em> mission universe at the dinner table. But the hardware kit complexity, the online modules, and the Math/EVS concepts adapt strictly to their specific NCERT syllabus.</p>
+                </div>
+            </div>
+            
+            <ul class="features-list">
+                <li>Streamlined Hardware Sourcing</li>
+                <li>Powerful Sibling Collaboration</li>
+                <li>100% NCERT Grade-Specific Alignment</li>
+                <li>Zero Parent Overload</li>
+            </ul>
+        </section>
+
+        <!-- MISSION 1: MARS ROVER -->
+        <div class="mission-container">
+            <div class="mission-header">
+                <h2>Mission: Build a Mars Rover</h2>
+                <p class="problem"><strong>Real Problem:</strong> How do scientists build machines to navigate, explore, and measure terrain on other planets without being there?</p>
+            </div>
+            
+            <div class="grade-grid">
+                <!-- Grade 3 -->
+                <div class="grade-col">
+                    <div class="grade-title g3">Grade 3</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Rubber-band powered mechanical rover with basic chassis.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Left-Right (Directions)</span>
+                            <span class="tag sci">Moving Things</span>
+                        </div>
+                        <p class="chapter-context">Understanding heavy vs. light materials, and mapping basic directional movement.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Where to Look From</span>
+                            <span class="tag math">Fun with Numbers</span>
+                        </div>
+                        <p class="chapter-context">Top/side/front views of the rover. Measuring distances in "blocks" or handspans.</p>
+                    </div>
+                </div>
+
+                <!-- Grade 4 -->
+                <div class="grade-col">
+                    <div class="grade-title g4">Grade 4</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Battery & motor-powered rover with a simple push-button switch.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Friction & Force</span>
+                            <span class="tag sci">Basic Energy</span>
+                        </div>
+                        <p class="chapter-context">Why wheels need grip (friction) and converting battery energy to motion.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Halves and Quarters</span>
+                            <span class="tag math">Tick-Tick-Tick</span>
+                        </div>
+                        <p class="chapter-context">Timing the rover's speed (Time) and calculating halfway/quarter checkpoints.</p>
+                    </div>
+                </div>
+
+                <!-- Grade 5 -->
+                <div class="grade-col">
+                    <div class="grade-title g5">Grade 5</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Motorized rover with basic suspension and steering mechanics.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Sunita in Space</span>
+                            <span class="tag sci">Gravity Concepts</span>
+                        </div>
+                        <p class="chapter-context">How gravity changes on different planets and designing for uneven terrain.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Area and its Boundary</span>
+                        </div>
+                        <p class="chapter-context">Calculating the exact perimeter (boundary) the rover patrols on the mission map.</p>
+                    </div>
+                </div>
+
+                <!-- Grade 6 -->
+                <div class="grade-col">
+                    <div class="grade-title g6">Grade 6</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Electronic rover with breadboard, wheel encoders, and complex circuitry.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Measurement & Units</span>
+                            <span class="tag sci">Motion Types</span>
+                        </div>
+                        <p class="chapter-context">Rectilinear vs circular motion, and standardizing scientific units of distance.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Mensuration</span>
+                            <span class="tag math">Decimals</span>
+                        </div>
+                        <p class="chapter-context">Advanced area calculations, using decimals for precise distance tracking via wheel rotations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MISSION 2: SMART PLANT RESCUE -->
+        <div class="mission-container">
+            <div class="mission-header">
+                <h2>Mission: Smart Plant Rescue</h2>
+                <p class="problem"><strong>Real Problem:</strong> Millions of plants die indoors because humans forget to water them or over-water them. Can we automate agriculture?</p>
+            </div>
+            
+            <div class="grade-grid">
+                <!-- Grade 3 -->
+                <div class="grade-col">
+                    <div class="grade-title g3">Grade 3</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">DIY Self-watering planter using capillary action (cotton wicks).</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">The Plant Fairy</span>
+                        </div>
+                        <p class="chapter-context">Identifying different parts of the plant, leaves, stems, and roots.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Jugs and Mugs</span>
+                        </div>
+                        <p class="chapter-context">Measuring water capacity. How many "mugs" of water does the reservoir hold?</p>
+                    </div>
+                </div>
+
+                <!-- Grade 4 -->
+                <div class="grade-col">
+                    <div class="grade-title g4">Grade 4</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Sunlight shadow tracker + engineered drip irrigation model.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Roots and Flowers</span>
+                        </div>
+                        <p class="chapter-context">Understanding how roots absorb water and the role of sunlight.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Tick-Tick-Tick</span>
+                            <span class="tag math">Tables & Shares</span>
+                        </div>
+                        <p class="chapter-context">Building a precise watering schedule across the week using time and basic division.</p>
+                    </div>
+                </div>
+
+                <!-- Grade 5 -->
+                <div class="grade-col">
+                    <div class="grade-title g5">Grade 5</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Soil testing kit using color-changing pH & moisture chemical strips.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT EVS / Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">A Seed Tells a Farmer's Story</span>
+                        </div>
+                        <p class="chapter-context">Germination, agricultural practices, and crop yield optimization.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Tenths and Hundredths</span>
+                            <span class="tag math">Smart Charts</span>
+                        </div>
+                        <p class="chapter-context">Measuring plant growth down to the millimeter and charting growth rates over 3 weeks.</p>
+                    </div>
+                </div>
+
+                <!-- Grade 6 -->
+                <div class="grade-col">
+                    <div class="grade-title g6">Grade 6</div>
+                    
+                    <div class="info-row">
+                        <strong>The Hardware Build</strong>
+                        <div class="build-box">Electronic soil moisture sensor connected to breadboard and buzzer.</div>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Plant Life Processes</span>
+                            <span class="tag sci">Conductors/Insulators</span>
+                        </div>
+                        <p class="chapter-context">How water conducts electricity to close the circuit in the soil moisture detector.</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Introduction to Algebra</span>
+                        </div>
+                        <p class="chapter-context">Writing variables and logic rules: <em>If Moisture (M) < Threshold (X), then trigger Buzzer (Y).</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
