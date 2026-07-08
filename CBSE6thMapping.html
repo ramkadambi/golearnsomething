@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | Grade 6 Science Mission Map</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Deep Blue */
+            --secondary: #10B981; /* Emerald Green */
+            --accent: #F59E0B; /* Amber */
+            --bg-light: #F3F4F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Differentiator Section */
+        .differentiator {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .differentiator h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .diff-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .diff-box h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diff-box.highlight h3 {
+            color: var(--secondary);
+        }
+
+        .features-list {
+            list-style-type: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Mission Map Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .mission-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .unit-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #E5E7EB;
+        }
+
+        .card-header h4 {
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .problem-statement {
+            background: #FEF3C7;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .problem-statement strong {
+            display: block;
+            color: #B45309;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-row strong {
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .extensions {
+            margin-top: auto;
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .extensions h5 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .extensions ul {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Bigger Structure Section */
+        .bigger-structure {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #F9FAFB;
+        }
+
+        /* Methodology / Pipeline */
+        .methodology {
+            text-align: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pipeline-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pipeline-arrow {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .methodology p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .differentiator-grid {
+                grid-template-columns: 1fr;
+            }
+            .pipeline {
+                flex-direction: column;
+            }
+            .pipeline-arrow {
+                transform: rotate(90deg);
+            }
+            .bigger-structure {
+                padding: 1.5rem;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LearnSMTH</h1>
+        <p>Grade 6 Science Mission Map</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- The Core Differentiator -->
+        <section class="differentiator">
+            <h2>Where LearnSMTH Becomes Differentiated</h2>
+            <div class="differentiator-grid">
+                <div class="diff-box">
+                    <h3>Most STEM companies start with:</h3>
+                    <p>"What project can we build?"</p>
+                </div>
+                <div class="diff-box highlight">
+                    <h3>We start with:</h3>
+                    <p><strong>"What chapter are students struggling to connect with real life?"</strong></p>
+                    <p>Then we convert every chapter into a mission.</p>
+                </div>
+            </div>
+            
+            <ul class="features-list">
+                <li>1 Major Workshop Mission / Month</li>
+                <li>3 Weeks of Online Learning</li>
+                <li>Online Modules Connect to Chapters</li>
+                <li>Same Mission Universe & Characters</li>
+                <li>Creates Continuity & Reduces Parent Overload</li>
+            </ul>
+        </section>
+
+        <h2 class="section-title">The Mission Map</h2>
+        
+        <section class="mission-grid">
+            
+            <!-- Unit 1 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 1</span>
+                    <h3>The Wonderful World of Science</h3>
+                    <h4>Mission 01: Mystery Detectives</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do scientists discover things nobody has seen before?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Investigation challenge (Students: observe, predict, test, conclude)</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Simple sensor investigation kit</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>LearnSMTH Connection</strong>
+                        <span>Aarav: Build | Meera: Observe patterns | Vihaan: Ask questions | Diya: Present findings</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Observation skills</li>
+                            <li>Week 2: Asking better questions</li>
+                            <li>Week 3: Designing experiments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 2 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 2</span>
+                    <h3>Diversity in Living Creatures</h3>
+                    <h4>Mission 02: Save the Urban Biodiversity Park</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Why are butterflies, birds and insects disappearing from cities?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Build biodiversity monitoring station</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>LDR + buzzer animal alert model</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Classification, Habitats, Adaptation</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Observe local plants</li>
+                            <li>Week 2: Bird count challenge</li>
+                            <li>Week 3: Design ideal habitat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 3 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 3</span>
+                    <h3>Mindful Eating</h3>
+                    <h4>Mission 03: Nutrition Rescue Mission</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Why are children tired despite eating enough food?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Food energy investigation</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Smart lunch tracker</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Nutrients, Balanced diet, Food groups</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Food diary</li>
+                            <li>Week 2: Nutrition detective</li>
+                            <li>Week 3: Healthy meal redesign</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 4 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 4</span>
+                    <h3>Exploring Magnets</h3>
+                    <h4>Mission 04: Chennai Metro Rescue</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do engineers use magnets every day?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Magnetic transport challenge</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Electromagnet experiments, Magnetic crane</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Attraction, Repulsion, Poles</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Magnet treasure hunt</li>
+                            <li>Week 2: Build magnetic games</li>
+                            <li>Week 3: Explore MRI and maglev trains</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 5</span>
+                    <h3>Measurement of Length and Motion</h3>
+                    <h4>Mission 05: Build a Mars Rover</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do scientists measure distances on other planets?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Distance and movement challenge</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Wheel encoder model, Simple moving vehicle</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Measurement, Units, Motion</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Measure your home</li>
+                            <li>Week 2: Estimate then verify</li>
+                            <li>Week 3: Motion observation journal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 6 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 6</span>
+                    <h3>Materials Around Us</h3>
+                    <h4>Mission 06: Disaster Relief Shelter</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        What materials make the strongest emergency shelter?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Build shelter prototype</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Material testing rig</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Hardness, Flexibility, Transparency</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Household material testing</li>
+                            <li>Week 2: Strength comparisons</li>
+                            <li>Week 3: Design challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 7 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 7</span>
+                    <h3>Temperature and Heat</h3>
+                    <h4>Mission 07: Cooling Dome Challenge</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Can Chennai stay cool without AC?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Your existing mission</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Temperature monitoring system, Cooling dome</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Heat transfer, Conduction, Convection, Radiation</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Thermal camera studies</li>
+                            <li>Week 2: Heat mapping home</li>
+                            <li>Week 3: Cooling innovation challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 8 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 8</span>
+                    <h3>A Journey Through States of Water</h3>
+                    <h4>Mission 08: Water From Air</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Can we create drinking water from humidity?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Condensation collector</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Humidity monitoring station</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Evaporation, Condensation, Water cycle</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Cloud experiments</li>
+                            <li>Week 2: Morning dew observation</li>
+                            <li>Week 3: Water harvesting challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 9 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 9</span>
+                    <h3>Methods of Separation</h3>
+                    <h4>Mission 09: Clean Water for Every Village</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we make dirty water usable?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Water purification challenge</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Multi-layer filter system</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Filtration, Sedimentation, Separation</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Kitchen science</li>
+                            <li>Week 2: Water quality studies</li>
+                            <li>Week 3: Village solution design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 10 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 10</span>
+                    <h3>Living Creatures</h3>
+                    <h4>Mission 10: Smart Plant Rescue</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Plants die because people forget to water them.
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Your existing Smart Plant Alert mission</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Soil moisture detector</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Plant needs, Life processes</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Plant growth journal</li>
+                            <li>Week 2: Compare sunlight effects</li>
+                            <li>Week 3: Root investigations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 11 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 11</span>
+                    <h3>Nature's Treasures</h3>
+                    <h4>Mission 11: Future Earth Guardians</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Will future generations have enough resources?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Resource conservation challenge</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Solar-powered model</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Natural resources, Conservation</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Home energy audit</li>
+                            <li>Week 2: Waste tracking</li>
+                            <li>Week 3: Resource mapping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 12 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Unit 12</span>
+                    <h3>Beyond Earth</h3>
+                    <h4>Mission 12: Moon Colony Mission</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How will humans live on the Moon?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop</strong>
+                        <span>Build lunar habitat</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Build</strong>
+                        <span>Life support simulation</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Science Concepts</strong>
+                        <span>Solar system, Space exploration</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Week 1: Space food</li>
+                            <li>Week 2: Moon base design</li>
+                            <li>Week 3: Future astronaut challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- The Bigger Structure -->
+        <section class="bigger-structure">
+            <h2 class="section-title" style="margin-bottom: 0.5rem;">The Bigger LearnSMTH Structure</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Instead of teaching chapters, we teach missions.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>NCERT Chapter</th>
+                        <th>LearnSMTH Mission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Science Process</td><td>Mystery Detectives</td></tr>
+                    <tr><td>Living Things</td><td>Biodiversity Park</td></tr>
+                    <tr><td>Food</td><td>Nutrition Rescue</td></tr>
+                    <tr><td>Magnets</td><td>Metro Rescue</td></tr>
+                    <tr><td>Motion</td><td>Mars Rover</td></tr>
+                    <tr><td>Materials</td><td>Disaster Shelter</td></tr>
+                    <tr><td>Heat</td><td>Cooling Dome</td></tr>
+                    <tr><td>Water</td><td>Water From Air</td></tr>
+                    <tr><td>Separation</td><td>Clean Water Mission</td></tr>
+                    <tr><td>Plants</td><td>Smart Plant Rescue</td></tr>
+                    <tr><td>Resources</td><td>Earth Guardians</td></tr>
+                    <tr><td>Space</td><td>Moon Colony</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Methodology -->
+        <section class="methodology">
+            <h2>The Core Differentiator Pipeline</h2>
+            <p style="margin-top: 1rem;">Now every chapter becomes a journey. The weekly online sessions become 15–20 minute "Mission Deep Dives" tied to what students are already learning in school, acting as the bridge between school learning, hands-on STEM, curiosity, and confidence.</p>
+            
+            <div class="pipeline">
+                <div class="pipeline-step">Real Problem</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Curiosity</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Experiment</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Breadboard</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">PCB</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Presentation</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">School Subject Connection</div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
