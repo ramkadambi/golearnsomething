@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH | Grade 6 STEM Mission Map</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Deep Blue */
+            --secondary: #10B981; /* Emerald Green */
+            --accent: #F59E0B; /* Amber */
+            --math-color: #8B5CF6; /* Purple for Math */
+            --bg-light: #F3F4F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Differentiator Section */
+        .differentiator {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .differentiator h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .diff-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .diff-box h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diff-box.highlight {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+        }
+
+        .diff-box.highlight h3 {
+            color: var(--primary);
+        }
+
+        .features-list {
+            list-style-type: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .features-list li.math-badge {
+            background: var(--math-color);
+        }
+
+        /* Mission Map Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .mission-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .unit-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            color: #E5E7EB;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-header h4 {
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .problem-statement {
+            background: #FEF3C7;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .problem-statement strong {
+            display: block;
+            color: #B45309;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-row strong {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+        
+        .info-row strong.sci-title { color: var(--secondary); }
+        .info-row strong.math-title { color: var(--math-color); }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.2rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .tag.sci { background: #D1FAE5; color: #065F46; }
+        .tag.math { background: #EDE9FE; color: #5B21B6; }
+
+        .extensions {
+            margin-top: auto;
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .extensions h5 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .extensions ul {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Bigger Structure Section */
+        .bigger-structure {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #F9FAFB;
+        }
+
+        .td-math { color: var(--math-color); font-weight: 500; }
+        .td-sci { color: var(--secondary); font-weight: 500; }
+
+        /* Methodology / Pipeline */
+        .methodology {
+            text-align: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pipeline-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pipeline-arrow {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .differentiator-grid {
+                grid-template-columns: 1fr;
+            }
+            .pipeline {
+                flex-direction: column;
+            }
+            .pipeline-arrow {
+                transform: rotate(90deg);
+            }
+            .bigger-structure {
+                padding: 1.5rem;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LearnSMTH</h1>
+        <p>Grade 6 Interdisciplinary STEM Mission Map</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- The Core Differentiator -->
+        <section class="differentiator">
+            <h2>Where LearnSMTH Becomes Differentiated</h2>
+            <div class="differentiator-grid">
+                <div class="diff-box">
+                    <h3>Most schools & programs teach in silos:</h3>
+                    <p>"Now it's time for Math."<br>"Now it's time for Science."</p>
+                </div>
+                <div class="diff-box highlight">
+                    <h3>We start with the real world:</h3>
+                    <p><strong>"What is a human problem we need to solve?"</strong></p>
+                    <p>When students solve missions, they naturally learn <em>both</em> the Science mechanism and the Math calculation required to make it work. No silos.</p>
+                </div>
+            </div>
+            
+            <ul class="features-list">
+                <li>1 Major Workshop Mission / Month</li>
+                <li>3 Weeks of Online Learning</li>
+                <li>Same Mission Universe & Characters</li>
+                <li class="math-badge">100% NCERT Math Embedded</li>
+                <li style="background: var(--secondary)">100% NCERT Science Embedded</li>
+            </ul>
+        </section>
+
+        <h2 class="section-title">The Mission Map</h2>
+        
+        <section class="mission-grid">
+            
+            <!-- Unit 1 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 01</span>
+                    <h3>The Wonderful World of Science</h3>
+                    <h4>Mission 01: Mystery Detectives</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do scientists discover and measure things nobody has seen before?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Simple sensor investigation kit</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Observation</span>
+                            <span class="tag sci">Prediction</span>
+                            <span class="tag sci">Testing</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Knowing Our Numbers</span>
+                            <span class="tag math">Whole Numbers</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Estimating measurements, scale of universe vs microbes)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Observation & large number skills</li>
+                            <li>Asking testable questions</li>
+                            <li>Designing your first experiment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 2 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 02</span>
+                    <h3>Diversity in Living Creatures</h3>
+                    <h4>Mission 02: Save the Biodiversity Park</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Why are species disappearing from cities, and how do we track them?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>LDR + buzzer animal alert model</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Classification</span>
+                            <span class="tag sci">Habitats</span>
+                            <span class="tag sci">Adaptation</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Data Handling</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Tally marks, pictographs, tracking local bird/insect populations)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Classify local plants</li>
+                            <li>Bird count & data graphing</li>
+                            <li>Design ideal urban habitat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 3 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 03</span>
+                    <h3>Mindful Eating</h3>
+                    <h4>Mission 03: Nutrition Rescue Mission</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Why are children tired despite eating enough food?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Smart lunch tracker & Food energy rig</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Nutrients</span>
+                            <span class="tag sci">Balanced Diet</span>
+                            <span class="tag sci">Food Groups</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Fractions</span>
+                            <span class="tag math">Decimals</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Portion sizes, dividing meals, calculating exact nutritional values per gram)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Food diary fractions</li>
+                            <li>Nutrition detective (Decimals)</li>
+                            <li>Healthy meal redesign</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 4 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 04</span>
+                    <h3>Exploring Magnets</h3>
+                    <h4>Mission 04: Chennai Metro Rescue</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do engineers lay transport lines and move heavy materials?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Electromagnet crane & Track layout</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Attraction/Repulsion</span>
+                            <span class="tag sci">Magnetic Poles</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Basic Geometrical Ideas</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Points, intersecting lines, parallel tracks, curves for the metro)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Magnet treasure hunt</li>
+                            <li>Draw metro geometry</li>
+                            <li>Explore maglev trains</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 05</span>
+                    <h3>Measurement & Motion</h3>
+                    <h4>Mission 05: Build a Mars Rover</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do scientists map terrain and measure distance on other planets?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Moving vehicle with wheel encoder</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Units of Measurement</span>
+                            <span class="tag sci">Motion Types</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Mensuration</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Calculating rover perimeter paths, distance covered based on wheel rotations)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Measure your home's perimeter</li>
+                            <li>Estimate then verify games</li>
+                            <li>Motion tracking journal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 6 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 06</span>
+                    <h3>Materials Around Us</h3>
+                    <h4>Mission 06: Disaster Relief Shelter</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        What structural shapes and materials make the safest emergency shelter?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Material testing rig & Shelter prototype</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Hardness</span>
+                            <span class="tag sci">Flexibility</span>
+                            <span class="tag sci">Properties</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Understanding Elementary Shapes</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(3D structures, why triangles are stronger than squares for roofs)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Household material testing</li>
+                            <li>Build polyhedrons with sticks</li>
+                            <li>Strength comparison challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 7 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 07</span>
+                    <h3>Temperature and Heat</h3>
+                    <h4>Mission 07: Cooling Dome Challenge</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Can we build homes in Chennai that stay cool without AC?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Cooling dome & Temp monitoring system</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Conduction</span>
+                            <span class="tag sci">Convection</span>
+                            <span class="tag sci">Radiation</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Integers</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Positive and negative values, calculating temperature drops/differences)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Heat mapping your home</li>
+                            <li>Integer temperature scales</li>
+                            <li>Cooling innovation challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 8 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 08</span>
+                    <h3>States of Water</h3>
+                    <h4>Mission 08: Water From Air</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Can we engineer a system to create drinking water from humidity?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Condensation collector & Humidity monitor</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Evaporation</span>
+                            <span class="tag sci">Condensation</span>
+                            <span class="tag sci">Water Cycle</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Playing with Numbers</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Using factors and multiples to design optimized arrays/grids for water collection)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Cloud in a bottle experiment</li>
+                            <li>Grid design optimization</li>
+                            <li>Morning dew observations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 9 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 09</span>
+                    <h3>Methods of Separation</h3>
+                    <h4>Mission 09: Clean Water Mission</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we make dirty water usable for remote villages?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Multi-layer gravity filter system</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Filtration</span>
+                            <span class="tag sci">Sedimentation</span>
+                            <span class="tag sci">Separation</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Ratio and Proportion</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Calculating correct ratios of filter layers: e.g., 3 parts sand to 1 part charcoal)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Kitchen science separation</li>
+                            <li>Testing filter ratios</li>
+                            <li>Village scale solution design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 10 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 10</span>
+                    <h3>Living Creatures</h3>
+                    <h4>Mission 10: Smart Plant Rescue</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        Plants die because people forget to water them. Can we automate it?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Soil moisture detector & alert logic</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Plant Needs</span>
+                            <span class="tag sci">Life Processes</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Algebra (Introduction)</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Writing rules with variables: If moisture < X, trigger buzzer Y)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Plant growth journal</li>
+                            <li>Writing "If-Then" algebra rules</li>
+                            <li>Compare sunlight vs shade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 11 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 11</span>
+                    <h3>Nature's Treasures</h3>
+                    <h4>Mission 11: Earth Guardians</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How do we capture natural energy with maximum efficiency?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Solar-powered motorized model</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Natural Resources</span>
+                            <span class="tag sci">Conservation</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Symmetry</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Symmetrical wind turbine blades, mirroring solar arrays for efficiency)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Home energy audit</li>
+                            <li>Nature's symmetry photo walk</li>
+                            <li>Resource waste tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 12 -->
+            <div class="mission-card">
+                <div class="card-header">
+                    <span class="unit-badge">Month 12</span>
+                    <h3>Beyond Earth</h3>
+                    <h4>Mission 12: Moon Colony Mission</h4>
+                </div>
+                <div class="card-body">
+                    <div class="problem-statement">
+                        <strong>Real Problem</strong>
+                        How will humans architect and survive in a colony on the Moon?
+                    </div>
+                    <div class="info-row">
+                        <strong>Workshop Build</strong>
+                        <span>Lunar habitat with life support simulation</span>
+                    </div>
+                    <div class="info-row">
+                        <strong class="sci-title">NCERT Science Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag sci">Solar System</span>
+                            <span class="tag sci">Space Exploration</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <strong class="math-title">NCERT Math Connections</strong>
+                        <div class="tag-container">
+                            <span class="tag math">Practical Geometry</span>
+                        </div>
+                        <span style="font-size: 0.9rem; margin-top: 0.3rem;">(Constructing exact circles for pressure domes, protractor angles for solar alignment)</span>
+                    </div>
+                    <div class="extensions">
+                        <h5>Weekly Extensions</h5>
+                        <ul>
+                            <li>Moon base architectural drafting</li>
+                            <li>Geometry construction challenges</li>
+                            <li>Future astronaut prep</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- The Bigger Structure -->
+        <section class="bigger-structure">
+            <h2 class="section-title" style="margin-bottom: 0.5rem;">The Integrated LearnSMTH Curriculum</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Every single chapter of Grade 6 Science AND Math mapped to 12 real-world missions.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>LearnSMTH Mission</th>
+                        <th>NCERT Science Integration</th>
+                        <th>NCERT Math Integration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>01. Mystery Detectives</strong></td>
+                        <td class="td-sci">Science Process & Measurement</td>
+                        <td class="td-math">Knowing Our Numbers & Whole Numbers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>02. Biodiversity Park</strong></td>
+                        <td class="td-sci">Living Things & Diversity</td>
+                        <td class="td-math">Data Handling</td>
+                    </tr>
+                    <tr>
+                        <td><strong>03. Nutrition Rescue</strong></td>
+                        <td class="td-sci">Food & Nutrition</td>
+                        <td class="td-math">Fractions & Decimals</td>
+                    </tr>
+                    <tr>
+                        <td><strong>04. Metro Rescue</strong></td>
+                        <td class="td-sci">Magnets & Magnetism</td>
+                        <td class="td-math">Basic Geometrical Ideas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>05. Mars Rover</strong></td>
+                        <td class="td-sci">Motion & Length</td>
+                        <td class="td-math">Mensuration (Area & Perimeter)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>06. Disaster Shelter</strong></td>
+                        <td class="td-sci">Materials Around Us</td>
+                        <td class="td-math">Understanding Elementary Shapes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>07. Cooling Dome</strong></td>
+                        <td class="td-sci">Heat & Temperature</td>
+                        <td class="td-math">Integers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>08. Water From Air</strong></td>
+                        <td class="td-sci">States of Water</td>
+                        <td class="td-math">Playing with Numbers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>09. Clean Water Mission</strong></td>
+                        <td class="td-sci">Methods of Separation</td>
+                        <td class="td-math">Ratio and Proportion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10. Smart Plant Rescue</strong></td>
+                        <td class="td-sci">Plants & Life Processes</td>
+                        <td class="td-math">Algebra (Introduction)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>11. Earth Guardians</strong></td>
+                        <td class="td-sci">Nature's Resources</td>
+                        <td class="td-math">Symmetry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>12. Moon Colony</strong></td>
+                        <td class="td-sci">Space & Beyond Earth</td>
+                        <td class="td-math">Practical Geometry</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Methodology -->
+        <section class="methodology">
+            <h2>The No-Silo Pipeline</h2>
+            <p style="margin-top: 1rem;">When an engineer builds a bridge, they don't stop doing science to go do math. We teach children the same way. The weekly online modules bridge the hands-on workshop directly to their school textbooks.</p>
+            
+            <div class="pipeline">
+                <div class="pipeline-step">Real Problem</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Build Prototype (Science)</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Optimize & Measure (Math)</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">Final Presentation</div>
+                <div class="pipeline-arrow">&rarr;</div>
+                <div class="pipeline-step">School Exam Confidence</div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
