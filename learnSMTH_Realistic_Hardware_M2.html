@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH - Realistic Smart Greenhouse Playground</title>
+    <style>
+        :root {
+            --workbench: #2c3e50;
+            --board-bg: #fdfdfd;
+            --arduino-blue: #006468;
+            --wire-red: #e74c3c;
+            --wire-black: #2c3e50;
+            --wire-yellow: #f1c40f;
+            --wire-blue: #3498db;
+            --wire-green: #2ecc71;
+            --error: #e74c3c;
+            --success: #2ecc71;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+        body {
+            background-color: var(--workbench);
+            color: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header { text-align: center; margin-bottom: 20px; }
+        header h1 { color: #f1c40f; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        header p { color: #bdc3c7; }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* --- WORKBENCH AREA (LEFT) --- */
+        .hardware-panel {
+            flex: 2;
+            background: #34495e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        /* Inventory tray */
+        .inventory {
+            background: #1abc9c;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            overflow-x: auto;
+        }
+
+        /* --- REALISTIC COMPONENTS CSS --- */
+        .component {
+            cursor: grab;
+            position: relative;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.4));
+            transition: transform 0.1s;
+            z-index: 100;
+        }
+        .component:active { cursor: grabbing; transform: scale(0.95); }
+        
+        /* DHT11 (Blue Grid Box) */
+        .comp-dht11 {
+            width: 35px; height: 45px;
+            background: #0ea5e9;
+            border-radius: 3px;
+            background-image: linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 5px 5px;
+            border: 1px solid #0284c7;
+            display: flex; justify-content: center; align-items: flex-end;
+        }
+        .comp-dht11::after {
+            content: '||||'; color: silver; font-size: 14px; letter-spacing: 2px;
+            position: absolute; bottom: -15px; font-weight: bold;
+        }
+
+        /* LDR (Photoresistor) */
+        .comp-ldr {
+            width: 24px; height: 24px;
+            background: #fde047;
+            border-radius: 50%;
+            border: 2px solid #ca8a04;
+            position: relative;
+        }
+        .comp-ldr::before {
+            content: '〰'; color: #b45309; font-size: 20px; font-weight: bold;
+            position: absolute; top: -3px; left: 0px; transform: rotate(90deg);
+        }
+        .comp-ldr::after {
+            content: '||'; color: silver; font-size: 16px; letter-spacing: 4px;
+            position: absolute; bottom: -15px; left: 4px; font-weight: bold;
+        }
+
+        /* Soil Sensor (Prongs) */
+        .comp-soil {
+            width: 20px; height: 60px;
+            background: linear-gradient(to bottom, #22c55e 30%, #fbbf24 30%);
+            border-radius: 2px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 30%, 80% 30%, 80% 100%, 60% 100%, 60% 40%, 40% 40%, 40% 100%, 20% 100%, 20% 30%, 0 30%);
+        }
+        .comp-soil::after {
+            content: '|||'; color: silver; font-size: 12px; letter-spacing: 1px;
+            position: absolute; top: -12px; left: 3px; font-weight: bold;
+        }
+
+        /* Grow Light (LED) */
+        .comp-led {
+            width: 20px; height: 30px;
+            background: rgba(168, 85, 247, 0.8);
+            border-radius: 50% 50% 10% 10%;
+            border-bottom: 3px solid #7e22ce;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), inset 5px 5px 10px rgba(255,255,255,0.6);
+            position: relative;
+        }
+        .comp-led::after {
+            content: '||'; color: silver; font-size: 16px; letter-spacing: 2px;
+            position: absolute; bottom: -15px; left: 4px; font-weight: bold;
+        }
+
+        /* Fan / Motor */
+        .comp-fan {
+            width: 40px; height: 40px;
+            background: #7f8c8d;
+            border-radius: 50%;
+            border: 4px solid #2c3e50;
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .comp-fan::before {
+            content: '🌀'; font-size: 24px;
+        }
+        .comp-fan::after {
+            content: '='; color: #e74c3c; font-size: 20px; position: absolute; left: -15px;
+        }
+
+        /* Water Pump */
+        .comp-pump {
+            width: 45px; height: 30px;
+            background: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            position: relative;
+        }
+        .comp-pump::before {
+            content: '🚰'; font-size: 20px; position: absolute; top: 2px; left: 10px;
+        }
+        .comp-pump::after {
+            content: '='; color: #3498db; font-size: 20px; position: absolute; left: -15px; top: 0;
+        }
+
+        .item-wrapper { text-align: center; font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+
+        /* --- BREADBOARD & ARDUINO --- */
+        .electronics-stage {
+            display: flex; gap: 30px; align-items: center; justify-content: center;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .breadboard {
+            width: 400px; height: 220px;
+            background-color: var(--board-bg);
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        
+        /* The Holes */
+        .bb-holes {
+            width: 100%; height: 30px;
+            background-image: radial-gradient(#2c3e50 30%, transparent 35%);
+            background-size: 12px 12px;
+            background-position: 0 0;
+            margin-bottom: 5px;
+        }
+        .bb-power-rail {
+            border-top: 2px solid var(--wire-red);
+            border-bottom: 2px solid var(--wire-blue);
+            height: 35px; padding: 2px 0;
+        }
+        .bb-center-trench {
+            height: 15px; width: 100%; background: #ecf0f1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin: 5px 0;
+        }
+        
+        /* Drop Zones on Breadboard */
+        .dropzone {
+            position: absolute;
+            border: 2px dashed #3498db;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 4px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 0.7rem; color: #2980b9; font-weight: bold;
+            transition: all 0.2s;
+        }
+        .dropzone.dragover { background: rgba(46, 204, 113, 0.4); border-color: #2ecc71; }
+        
+        #dz-dht11 { top: 60px; left: 30px; width: 45px; height: 50px; }
+        #dz-ldr { top: 60px; left: 100px; width: 35px; height: 50px; }
+        #dz-soil { top: 60px; left: 170px; width: 35px; height: 70px; }
+        #dz-led { top: 120px; left: 240px; width: 35px; height: 45px; }
+        #dz-fan { top: 120px; left: 300px; width: 50px; height: 50px; }
+        #dz-pump { top: 120px; left: 30px; width: 55px; height: 40px; }
+
+        /* Arduino Uno representation */
+        .arduino {
+            width: 250px; height: 180px;
+            background-color: var(--arduino-blue);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.2);
+            position: relative;
+            padding: 10px;
+        }
+        .ard-usb {
+            width: 40px; height: 40px; background: silver; position: absolute; left: -5px; top: 20px; border-radius: 4px;
+        }
+        .ard-chip {
+            width: 80px; height: 25px; background: #222; position: absolute; top: 80px; left: 85px; border-radius: 2px;
+        }
+        .ard-headers-top {
+            width: 180px; height: 12px; background: #111; position: absolute; top: 5px; right: 20px;
+            background-image: linear-gradient(90deg, transparent 90%, #333 90%); background-size: 10px 100%;
+        }
+        .ard-headers-bottom {
+            width: 150px; height: 12px; background: #111; position: absolute; bottom: 5px; right: 20px;
+            background-image: linear-gradient(90deg, transparent 90%, #333 90%); background-size: 10px 100%;
+        }
+        .ard-logo {
+            position: absolute; top: 40px; right: 40px; font-size: 20px; color: white; font-weight: bold; opacity: 0.8;
+        }
+
+        /* Dynamic Wires (SVG) */
+        svg.wires {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;
+        }
+        .wire-path {
+            fill: none; stroke-width: 4; stroke-linecap: round; opacity: 0; transition: opacity 0.5s;
+        }
+        .wire-path.visible { opacity: 1; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1s forwards; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+
+        /* Status LED on Arduino */
+        .status-led {
+            width: 8px; height: 8px; background: #555; border-radius: 50%; position: absolute; top: 40px; right: 20px;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .status-led.active { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
+
+        /* --- SIMULATION AREA (RIGHT) --- */
+        .simulation-panel {
+            flex: 1;
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 12px;
+            color: #2c3e50;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column;
+        }
+
+        .controls { margin-bottom: 20px; }
+        .control-row { margin-bottom: 15px; }
+        .control-row label { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; }
+        input[type="range"] { width: 100%; cursor: pointer; accent-color: #16a085; }
+
+        .environment-window {
+            height: 250px; background: #87CEEB; border-radius: 8px; position: relative; overflow: hidden;
+            border: 4px solid #bdc3c7; transition: background 0.5s;
+            display: flex; justify-content: center; align-items: flex-end;
+        }
+
+        .env-sun { position: absolute; top: 10px; right: 10px; font-size: 40px; transition: opacity 0.3s; }
+        .env-ground { position: absolute; bottom: 0; width: 100%; height: 50px; background: #8B4513; transition: background 0.5s; }
+        .env-plant { font-size: 80px; z-index: 5; margin-bottom: 20px; transition: transform 0.5s; transform-origin: bottom center; }
+        
+        /* Actuator Outputs */
+        .out-water {
+            position: absolute; bottom: 50px; font-size: 30px; opacity: 0; color: #3498db; z-index: 6;
+        }
+        .out-water.active { opacity: 1; animation: rain 0.5s linear infinite; }
+        @keyframes rain { 0% { transform: translateY(-20px); opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
+
+        .out-fan { position: absolute; top: 10px; left: 10px; font-size: 40px; opacity: 0.2; }
+        .out-fan.active { opacity: 1; animation: spin 0.5s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .out-light {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(168, 85, 247, 0.4);
+            pointer-events: none; opacity: 0; transition: opacity 0.3s; z-index: 4;
+        }
+        .out-light.active { opacity: 1; }
+
+        /* System Messages */
+        .sys-messages {
+            margin-top: 15px; padding: 15px; background: #34495e; color: white; border-radius: 8px; font-size: 0.9rem; min-height: 80px;
+        }
+        .msg-err { color: #e74c3c; font-weight: bold; }
+        .msg-ok { color: #2ecc71; font-weight: bold; }
+        .msg-warn { color: #f1c40f; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Smart Greenhouse Hardware Lab</h1>
+        <p>Wire up the real components on the breadboard to make the greenhouse intelligent.</p>
+    </header>
+
+    <div class="main-container">
+        <!-- LEFT: Hardware Workbench -->
+        <div class="hardware-panel">
+            <div class="inventory">
+                <div class="item-wrapper">
+                    <div class="component comp-dht11" draggable="true" data-type="dht11" id="inv-dht11"></div>
+                    <span>DHT11 Temp</span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="component comp-ldr" draggable="true" data-type="ldr" id="inv-ldr"></div>
+                    <span>LDR Light</span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="component comp-soil" draggable="true" data-type="soil" id="inv-soil"></div>
+                    <span>Soil Sensor</span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="component comp-led" draggable="true" data-type="led" id="inv-led"></div>
+                    <span>Grow LED</span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="component comp-fan" draggable="true" data-type="fan" id="inv-fan"></div>
+                    <span>Exhaust Fan</span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="component comp-pump" draggable="true" data-type="pump" id="inv-pump"></div>
+                    <span>Water Pump</span>
+                </div>
+            </div>
+
+            <div class="electronics-stage">
+                <!-- SVG Wires overlay -->
+                <svg class="wires" id="wire-layer" width="100%" height="100%">
+                    <!-- Pre-drawn paths, hidden until connected -->
+                    <path id="wire-dht11" class="wire-path" stroke="var(--wire-blue)" d="M 90,140 C 90,50 300,50 500,80" />
+                    <path id="wire-ldr" class="wire-path" stroke="var(--wire-yellow)" d="M 160,140 C 160,60 350,60 520,80" />
+                    <path id="wire-soil" class="wire-path" stroke="var(--wire-green)" d="M 230,140 C 230,70 400,70 540,80" />
+                    <path id="wire-led" class="wire-path" stroke="var(--wire-red)" d="M 300,200 C 300,280 450,280 500,220" />
+                    <path id="wire-fan" class="wire-path" stroke="var(--wire-black)" d="M 370,200 C 370,290 480,290 520,220" />
+                    <path id="wire-pump" class="wire-path" stroke="var(--wire-blue)" d="M 100,200 C 100,300 400,300 540,220" />
+                </svg>
+
+                <div class="breadboard">
+                    <div class="bb-holes bb-power-rail"></div>
+                    <div class="bb-holes" style="height: 50px;"></div>
+                    
+                    <!-- Drop Zones -->
+                    <div class="dropzone" id="dz-dht11" data-accept="dht11">DHT11</div>
+                    <div class="dropzone" id="dz-ldr" data-accept="ldr">LDR</div>
+                    <div class="dropzone" id="dz-soil" data-accept="soil">SOIL</div>
+                    
+                    <div class="bb-center-trench"></div>
+                    
+                    <div class="bb-holes" style="height: 50px;"></div>
+                    
+                    <div class="dropzone" id="dz-pump" data-accept="pump">PUMP</div>
+                    <div class="dropzone" id="dz-led" data-accept="led">LED</div>
+                    <div class="dropzone" id="dz-fan" data-accept="fan">FAN</div>
+
+                    <div class="bb-holes bb-power-rail"></div>
+                </div>
+
+                <div class="arduino">
+                    <div class="ard-usb"></div>
+                    <div class="ard-headers-top"></div>
+                    <div class="ard-logo">UNO</div>
+                    <div class="status-led" id="ard-led"></div>
+                    <div class="ard-chip"></div>
+                    <div class="ard-headers-bottom"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Simulation Panel -->
+        <div class="simulation-panel">
+            <h3>Environment Testing</h3>
+            
+            <div class="controls">
+                <div class="control-row">
+                    <label>Soil Moisture <span id="val-soil">50%</span></label>
+                    <input type="range" id="sl-soil" min="0" max="100" value="50">
+                </div>
+                <div class="control-row">
+                    <label>Temperature <span id="val-temp">25°C</span></label>
+                    <input type="range" id="sl-temp" min="10" max="50" value="25">
+                </div>
+                <div class="control-row">
+                    <label>Sunlight <span id="val-light">80%</span></label>
+                    <input type="range" id="sl-light" min="0" max="100" value="80">
+                </div>
+            </div>
+
+            <div class="environment-window" id="env-win">
+                <div class="out-light" id="out-light"></div>
+                <div class="env-sun" id="env-sun">☀️</div>
+                <div class="out-fan" id="out-fan">🌀</div>
+                <div class="env-plant" id="env-plant">🌱</div>
+                <div class="out-water" id="out-water">💧</div>
+                <div class="env-ground" id="env-ground"></div>
+            </div>
+
+            <div class="sys-messages" id="sys-msg">
+                System Initialized. Awaiting hardware connections...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // System State Trackers
+        const wired = { dht11: false, ldr: false, soil: false, pump: false, fan: false, led: false };
+        const env = { temp: 25, light: 80, soil: 50 };
+
+        const sysMsg = document.getElementById('sys-msg');
+        let draggedComponent = null;
+
+        // --- DRAG AND DROP LOGIC ---
+        document.querySelectorAll('.component').forEach(comp => {
+            comp.addEventListener('dragstart', (e) => {
+                draggedComponent = e.target;
+                e.target.style.opacity = '0.6';
+            });
+            comp.addEventListener('dragend', (e) => {
+                e.target.style.opacity = '1';
+                draggedComponent = null;
+            });
+        });
+
+        document.querySelectorAll('.dropzone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+            zone.addEventListener('dragleave', () => { zone.classList.remove('dragover'); });
+            
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+                
+                if (!draggedComponent) return;
+
+                const compType = draggedComponent.dataset.type;
+                const expectedType = zone.dataset.accept;
+
+                if (compType === expectedType) {
+                    // Success snap
+                    zone.innerHTML = '';
+                    zone.appendChild(draggedComponent);
+                    draggedComponent.setAttribute('draggable', 'false'); // lock it
+                    draggedComponent.style.cursor = 'default';
+                    
+                    // Activate System / Show Wire
+                    wired[compType] = true;
+                    document.getElementById(`wire-${compType}`).classList.add('visible');
+                    document.getElementById('ard-led').classList.add('active'); // blink arduino
+                    setTimeout(() => document.getElementById('ard-led').classList.remove('active'), 200);
+
+                    logMsg(`Hardware Connected: ${compType.toUpperCase()} module mapped to Arduino.`, 'msg-ok');
+                    updateSimulation();
+                } else {
+                    logMsg(`Wiring Error: You cannot plug a ${compType} into the ${expectedType} circuit path! Check your pinouts.`, 'msg-err');
+                }
+            });
+        });
+
+        // --- SLIDER LOGIC ---
+        document.getElementById('sl-temp').addEventListener('input', (e) => {
+            env.temp = parseInt(e.target.value);
+            document.getElementById('val-temp').innerText = env.temp + "°C";
+            updateSimulation();
+        });
+        document.getElementById('sl-light').addEventListener('input', (e) => {
+            env.light = parseInt(e.target.value);
+            document.getElementById('val-light').innerText = env.light + "%";
+            updateSimulation();
+        });
+        document.getElementById('sl-soil').addEventListener('input', (e) => {
+            env.soil = parseInt(e.target.value);
+            document.getElementById('val-soil').innerText = env.soil + "%";
+            updateSimulation();
+        });
+
+        function logMsg(msg, cssClass) {
+            sysMsg.innerHTML = `<span class="${cssClass}">[LOG] ${msg}</span>`;
+            setTimeout(() => { if(sysMsg.innerText.includes(msg)) sysMsg.innerText = "System running normal..."; }, 4000);
+        }
+
+        // --- SIMULATION ENGINE ---
+        function updateSimulation() {
+            // 1. Visual Environment Updates
+            document.getElementById('env-sun').style.opacity = env.light / 100;
+            const ground = document.getElementById('env-ground');
+            if (env.soil < 30) ground.style.background = '#d35400'; // dry
+            else if (env.soil > 70) ground.style.background = '#3e2723'; // mud
+            else ground.style.background = '#8B4513'; // good
+
+            const plant = document.getElementById('env-plant');
+            if (env.temp > 40 || env.soil < 20) plant.style.transform = 'scale(0.8) rotate(15deg)'; // wilt
+            else plant.style.transform = 'scale(1) rotate(0deg)';
+
+            // 2. Logic Execution (Sense -> Decide -> Act)
+            
+            // TEMPERATURE -> FAN
+            const needsCooling = env.temp > 35;
+            const fanUI = document.getElementById('out-fan');
+            if (needsCooling) {
+                if (wired.dht11 && wired.fan) fanUI.classList.add('active');
+                else {
+                    fanUI.classList.remove('active');
+                    if (wired.dht11 && !wired.fan) logMsg("ALERT: Overheating! Temp sensed, but Exhaust Fan is not wired.", "msg-warn");
+                    if (!wired.dht11 && wired.fan) logMsg("ALERT: Plant is dying of heat, but system is blind without DHT11 sensor.", "msg-err");
+                }
+            } else fanUI.classList.remove('active');
+
+            // MOISTURE -> PUMP
+            const needsWater = env.soil < 40;
+            const pumpUI = document.getElementById('out-water');
+            if (needsWater) {
+                if (wired.soil && wired.pump) pumpUI.classList.add('active');
+                else {
+                    pumpUI.classList.remove('active');
+                    if (wired.soil && !wired.pump) logMsg("ALERT: Soil dry! Sensor active, but Water Pump is not wired.", "msg-warn");
+                }
+            } else pumpUI.classList.remove('active');
+
+            // LIGHT -> GROW LED
+            const needsLight = env.light < 30;
+            const ledUI = document.getElementById('out-light');
+            if (needsLight) {
+                if (wired.ldr && wired.led) ledUI.classList.add('active');
+                else ledUI.classList.remove('active');
+            } else ledUI.classList.remove('active');
+        }
+
+        // Init
+        updateSimulation();
+    </script>
+</body>
+</html>

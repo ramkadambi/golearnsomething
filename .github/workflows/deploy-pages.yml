@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'index.html'
+      - '*.html'
       - 'Images/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
       - name: Create docs folder
         run: |
           mkdir -p docs
-          cp index.html docs/
+          find . -maxdepth 1 -type f -name '*.html' -exec cp -t docs {} +
           cp -r Images docs/
       
       - name: Upload artifact

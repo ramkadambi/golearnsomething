@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH Mission 2: Smart Greenhouse - Syllabus Coverage</title>
+    <style>
+        :root {
+            --primary: #166534; /* Deep Green */
+            --secondary: #059669; /* Emerald Green */
+            --accent: #d97706; /* Earthy Amber */
+            --bg: #f0fdf4; /* Light Mint/Green Background */
+            --text-dark: #1f2937;
+            --text-light: #4b5563;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .progression-badge {
+            display: inline-block;
+            background-color: #fff;
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .intro h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .subject-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .subject-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .chapter {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .chapter:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .chapter h4 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #dcfce7;
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .engineering-focus {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-style: italic;
+            border-left: 4px solid #d97706;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Specific Subject Colors */
+        .math-header { background-color: #0284c7; }
+        .english-header { background-color: #7c3aed; }
+        .social-header { background-color: #b45309; }
+        .tech-header { background-color: #334155; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Mission 2: Smart Greenhouse</h1>
+        <p>LearnSMTH Grade 10 Transformation Journey</p>
+        <div class="progression-badge">Engineering Theme: Sense → Decide → Act</div>
+    </header>
+
+    <div class="intro">
+        <h2>The Real-World Problem</h2>
+        <p><strong>Year 2035:</strong> Food prices in Chennai have doubled. Erratic rainfall and severe heat waves are severely affecting vegetable production.</p>
+        <br>
+        <p>A startup wants to build <strong>smart greenhouses</strong> that automatically monitor plants and make intelligent decisions to improve growth while drastically reducing water usage. The challenge for our Grade 10 students: <em>Can you build a greenhouse that thinks?</em></p>
+        <br>
+        <p>Building upon the observation skills from Mission 1, Mission 2 advances students into <strong>intelligent control and automation</strong> using soil moisture sensors, temperature sensors (DHT11), LDRs, water pumps, and grow lights.</p>
+    </div>
+
+    <div class="grid-layout">
+        
+        <!-- Science Section -->
+        <div class="subject-section">
+            <div class="subject-header">Science Integration</div>
+            
+            <div class="chapter">
+                <h4>1. Chemical Reactions & Periodic Classification</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Dissolution, Plant Nutrients, Elements (N, P, K).</p>
+                    <p><strong>Mission Application:</strong> Students compare dry fertilizers with water-mixed ones to understand physical dissolution versus chemical reactions. They investigate why elements like Nitrogen, Phosphorus, and Potassium are critical to crop yield.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>2. Acids, Bases and Salts</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Soil pH.</p>
+                    <p><strong>Mission Application:</strong> Students test the pH of acidic, neutral, and alkaline soils. They must determine the optimum pH for growing specific crops like tomatoes, turning pH into an essential engineering design parameter.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>3. Metals, Non-metals & Carbon Compounds</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Corrosion Resistance, Polymers, UV Stability.</p>
+                    <p><strong>Mission Application:</strong> Greenhouses are highly humid. Students compare iron, aluminum, stainless steel, and PVC frames to observe rusting. They also evaluate polymers (plastic, glass, polycarbonate) to select the safest, most durable, and UV-resistant covering material.</p>
+                </div>
+            </div>
+            
+            <div class="chapter">
+                <h4>4. Life Processes, Control & Coordination</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Photosynthesis, Root Absorption, Plant Hormones.</p>
+                    <p><strong>Mission Application:</strong> Students link real-time sensor values directly to biology. They conceptually compare how plant hormones and the human nervous system make decisions to how their Arduino logic board controls the greenhouse environment.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>5. Light & The Human Eye</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> LED Spectrums, Reflection, Light Sensors.</p>
+                    <p><strong>Mission Application:</strong> Can red and blue LEDs help plants grow faster? Students investigate light intensity and compare how the human eye, a camera, and their LDR (light-dependent resistor) detect light.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>6. Electricity & Magnetic Effects</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Voltage, Relays, Electromagnetism.</p>
+                    <p><strong>Mission Application:</strong> This forms the core electronics of the mission. Students learn about voltage and current by wiring water pumps and batteries. They open relay modules to observe how electromagnets function as automated switches.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Math Section -->
+        <div class="subject-section">
+            <div class="subject-header math-header">Mathematics Integration</div>
+            
+            <div class="chapter">
+                <h4>1. Real Numbers & Arithmetic Progression</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Tank Capacity, Growth Sequences.</p>
+                    <p><strong>Mission Application:</strong> Students calculate greenhouse volume and water tank capacities. They track plant growth over time (e.g., 2cm, 4cm, 6cm) to recognize arithmetic sequences and predict future height.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>2. Linear & Quadratic Equations</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Water Planning, Light Intensity.</p>
+                    <p><strong>Mission Application:</strong> Students use linear equations to scale water requirements (if 1 plant needs 500ml, how much for 100 plants, factoring in rainfall?). They use quadratics to understand how light intensity diminishes with distance from the grow light.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>3. Triangles, Circles & Trigonometry</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Roof Trusses, Sprinkler Coverage, Angles.</p>
+                    <p><strong>Mission Application:</strong> Students build paper models of roof trusses to load-test them, exploring why triangles are strong. They optimize circular sprinkler overlap to ensure no dry spots, and use trigonometry to calculate the ideal roof slope and solar panel inclination for Chennai's latitude.</p>
+                </div>
+            </div>
+            
+            <div class="chapter">
+                <h4>4. Coordinate Geometry & Statistics</h4>
+                <div class="chapter-details">
+                    <p><span class="badge">Concept</span> Layout Mapping, Data Trends.</p>
+                    <p><strong>Mission Application:</strong> Students map the greenhouse layout on a grid to determine the shortest, safest wiring paths. They collect daily temperature, humidity, and light data, computing the mean and median to identify climate trends inside the dome.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Subjects -->
+        <div class="subject-section">
+            <div class="subject-header tech-header">Tech, Business & Humanities</div>
+            
+            <div class="chapter">
+                <h4>English & Communication</h4>
+                <div class="chapter-details">
+                    <p>Students step into professional roles to write comprehensive <strong>Instruction Manuals and Maintenance Guides</strong> for their smart greenhouses. They also draft video presentations and investor pitches.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>Social Science</h4>
+                <div class="chapter-details">
+                    <p>Students study the history of the Green Revolution and compare it to modern agricultural economics. They calculate the Return on Investment (ROI) for smart farming and investigate government subsidies available for tech adoption in agriculture.</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>Computer Science (AI & Automation)</h4>
+                <div class="chapter-details">
+                    <p>Students program the actual control logic: <em>IF Soil Moisture < 30% -> Turn Pump ON. IF Temperature > 35°C -> Turn Fan ON.</em> They extend this to data logging and simple predictive models ("Water likely needed tomorrow").</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h4>Entrepreneurship</h4>
+                <div class="chapter-details">
+                    <p>Teams found <strong>GreenGrow Technologies</strong>. They define their customer segments (urban farms, apartment complexes, schools), establish a recurring revenue model for monitoring, and pitch their competitive advantage to investors.</p>
+                </div>
+            </div>
+            
+            <div class="engineering-focus">
+                "By the end of Mission 2, students are no longer just building projects—they are thinking like systems engineers. Every NCERT subject is required to make their greenhouse intelligent."
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>&copy; LearnSMTH Education. Built for the Grade 10 Transformation Journey.</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSMTH - Mission 2 Virtual Playground</title>
+    <style>
+        :root {
+            --primary: #166534;
+            --secondary: #22c55e;
+            --bg: #f0fdf4;
+            --text-dark: #1f2937;
+            --panel-bg: #ffffff;
+            --error: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 5px;
+        }
+
+        /* Drag and Drop Area */
+        .components-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .draggable {
+            background: #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: grab;
+            user-select: none;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+        
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .draggable[data-type="sensor"] { border-left: 5px solid #3b82f6; }
+        .draggable[data-type="actuator"] { border-left: 5px solid #f59e0b; }
+
+        .breadboard {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .circuit-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .dropzone {
+            flex: 1;
+            height: 60px;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .dropzone.dragover {
+            background: #e0f2fe;
+            border-color: #3b82f6;
+        }
+
+        .logic-center {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+            padding: 0 10px;
+        }
+
+        /* Controls Area */
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Simulation Visuals */
+        .simulation-window {
+            height: 300px;
+            background: #1e293b;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #334155;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            transition: opacity 0.3s;
+        }
+
+        .plant {
+            font-size: 80px;
+            transition: transform 0.3s;
+            z-index: 10;
+            margin-bottom: 20px;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: #854d0e;
+            transition: background 0.3s;
+        }
+
+        /* Actuator Animations */
+        .fan-visual {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 40px;
+            opacity: 0.2;
+        }
+        .fan-visual.active {
+            opacity: 1;
+            animation: spin 1s linear infinite;
+        }
+
+        .water-visual {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            opacity: 0;
+            color: #3b82f6;
+            transition: opacity 0.3s;
+        }
+        .water-visual.active {
+            opacity: 1;
+            animation: bounce 0.5s alternate infinite;
+        }
+
+        .growlight-visual {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(168, 85, 247, 0.4);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .growlight-visual.active {
+            opacity: 1;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes bounce { 100% { transform: translateY(-10px); } }
+
+        /* Status & Errors */
+        #status-board {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            font-size: 0.9rem;
+            min-height: 60px;
+        }
+        .error-msg { color: var(--error); font-weight: bold; }
+        .success-msg { color: var(--secondary); font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Smart Greenhouse Virtual Playground</h1>
+        <p>Wire the sensors to the correct actuators, then test the environment.</p>
+    </header>
+
+    <div class="container">
+        <!-- Part 1: Component Box -->
+        <div class="panel">
+            <h3>Inventory (Drag me)</h3>
+            <div class="components-grid">
+                <div class="draggable" draggable="true" data-type="sensor" data-target="moisture" id="s-moist">💧 Soil Moisture</div>
+                <div class="draggable" draggable="true" data-type="sensor" data-target="temp" id="s-temp">🌡️ DHT11 (Temp)</div>
+                <div class="draggable" draggable="true" data-type="sensor" data-target="light" id="s-light">☀️ LDR (Light)</div>
+                
+                <div class="draggable" draggable="true" data-type="actuator" data-target="moisture" id="a-pump">🚰 Water Pump</div>
+                <div class="draggable" draggable="true" data-type="actuator" data-target="temp" id="a-fan">🌀 Exhaust Fan</div>
+                <div class="draggable" draggable="true" data-type="actuator" data-target="light" id="a-led">💡 Grow Light</div>
+            </div>
+
+            <div id="status-board">
+                Waiting for components to be wired...
+            </div>
+        </div>
+
+        <!-- Part 2: Breadboard Logic -->
+        <div class="panel">
+            <h3>Arduino Logic Board</h3>
+            <div class="breadboard">
+                <!-- Circuit 1: Water -->
+                <div class="circuit-row">
+                    <div class="dropzone" data-accept="sensor" data-expected="moisture">Drop Sensor Here</div>
+                    <div class="logic-center">➔ IF LOW ➔</div>
+                    <div class="dropzone" data-accept="actuator" data-expected="moisture">Drop Actuator Here</div>
+                </div>
+                
+                <!-- Circuit 2: Temp -->
+                <div class="circuit-row">
+                    <div class="dropzone" data-accept="sensor" data-expected="temp">Drop Sensor Here</div>
+                    <div class="logic-center">➔ IF HIGH ➔</div>
+                    <div class="dropzone" data-accept="actuator" data-expected="temp">Drop Actuator Here</div>
+                </div>
+
+                <!-- Circuit 3: Light -->
+                <div class="circuit-row">
+                    <div class="dropzone" data-accept="sensor" data-expected="light">Drop Sensor Here</div>
+                    <div class="logic-center">➔ IF DARK ➔</div>
+                    <div class="dropzone" data-accept="actuator" data-expected="light">Drop Actuator Here</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part 3: Simulation Output -->
+        <div class="panel">
+            <h3>Environment Testing</h3>
+            
+            <div class="control-group">
+                <label>Soil Moisture <span id="val-moisture">50%</span></label>
+                <input type="range" id="slider-moisture" min="0" max="100" value="50">
+            </div>
+            <div class="control-group">
+                <label>Temperature <span id="val-temp">25°C</span></label>
+                <input type="range" id="slider-temp" min="10" max="50" value="25">
+            </div>
+            <div class="control-group">
+                <label>Sunlight <span id="val-light">80%</span></label>
+                <input type="range" id="slider-light" min="0" max="100" value="80">
+            </div>
+
+            <div class="simulation-window">
+                <div class="growlight-visual" id="sim-growlight"></div>
+                <div class="sun" id="sim-sun">☀️</div>
+                <div class="fan-visual" id="sim-fan">🌀</div>
+                
+                <div class="plant" id="sim-plant">🌱</div>
+                <div class="water-visual" id="sim-water">💦</div>
+                
+                <div class="ground" id="sim-ground"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State tracking
+        const systemState = {
+            circuits: {
+                moisture: { sensor: false, actuator: false },
+                temp: { sensor: false, actuator: false },
+                light: { sensor: false, actuator: false }
+            },
+            environment: {
+                moisture: 50,
+                temp: 25,
+                light: 80
+            }
+        };
+
+        const statusBoard = document.getElementById('status-board');
+        let draggedItem = null;
+
+        // Drag and Drop Logic
+        document.querySelectorAll('.draggable').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.style.opacity = '0.5', 0);
+            });
+            item.addEventListener('dragend', (e) => {
+                setTimeout(() => e.target.style.opacity = '1', 0);
+                draggedItem = null;
+            });
+        });
+
+        document.querySelectorAll('.dropzone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('dragover');
+            });
+            
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('dragover');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+                
+                if (!draggedItem) return;
+
+                const itemType = draggedItem.dataset.type;
+                const itemTarget = draggedItem.dataset.target;
+                const zoneAccept = zone.dataset.accept;
+                const zoneExpected = zone.dataset.expected;
+
+                // Validation Logic
+                if (itemType !== zoneAccept) {
+                    showStatus(`Error: You can't plug a ${itemType} into an ${zoneAccept} slot!`, 'error');
+                    return;
+                }
+
+                if (itemTarget !== zoneExpected) {
+                    showStatus(`Logic Error: Connecting a ${itemTarget} component to the ${zoneExpected} circuit won't solve the problem!`, 'error');
+                    return;
+                }
+
+                // Success
+                zone.innerHTML = '';
+                zone.appendChild(draggedItem);
+                draggedItem.setAttribute('draggable', 'false'); // Lock in place
+                draggedItem.style.cursor = 'default';
+                
+                systemState.circuits[itemTarget][itemType] = true;
+                showStatus(`Success! ${draggedItem.innerText} wired correctly.`, 'success');
+                
+                evaluateSystem();
+            });
+        });
+
+        function showStatus(msg, type) {
+            statusBoard.innerHTML = `<span class="${type === 'error' ? 'error-msg' : 'success-msg'}">${msg}</span>`;
+            setTimeout(() => {
+                if(statusBoard.innerText.includes(msg)) statusBoard.innerText = "System running...";
+            }, 3000);
+        }
+
+        // Sliders Logic
+        document.getElementById('slider-moisture').addEventListener('input', (e) => {
+            systemState.environment.moisture = e.target.value;
+            document.getElementById('val-moisture').innerText = `${e.target.value}%`;
+            evaluateSystem();
+        });
+
+        document.getElementById('slider-temp').addEventListener('input', (e) => {
+            systemState.environment.temp = e.target.value;
+            document.getElementById('val-temp').innerText = `${e.target.value}°C`;
+            evaluateSystem();
+        });
+
+        document.getElementById('slider-light').addEventListener('input', (e) => {
+            systemState.environment.light = e.target.value;
+            document.getElementById('val-light').innerText = `${e.target.value}%`;
+            evaluateSystem();
+        });
+
+        // Core Evaluation Engine
+        function evaluateSystem() {
+            const env = systemState.environment;
+            const circuits = systemState.circuits;
+
+            // Visual updates for environment changes
+            document.getElementById('sim-sun').style.opacity = env.light / 100;
+            
+            const ground = document.getElementById('sim-ground');
+            if (env.moisture < 30) ground.style.background = '#d97706'; // Dry dirt
+            else if (env.moisture > 70) ground.style.background = '#451a03'; // Mud
+            else ground.style.background = '#854d0e'; // Healthy dirt
+
+            const plant = document.getElementById('sim-plant');
+            if (env.temp > 40 || env.moisture < 20) plant.style.transform = 'scale(0.8) rotate(15deg)'; // Wilting
+            else plant.style.transform = 'scale(1) rotate(0deg)'; // Healthy
+
+            // Actuator Logic
+            // 1. Water Pump Logic (IF Moisture < 40%)
+            const needsWater = env.moisture < 40;
+            const waterVisual = document.getElementById('sim-water');
+            if (needsWater) {
+                if (circuits.moisture.sensor && circuits.moisture.actuator) {
+                    waterVisual.classList.add('active'); // Pump triggers!
+                } else if (!circuits.moisture.sensor) {
+                    waterVisual.classList.remove('active');
+                    showStatus("Warning: Plant is thirsty but the system cannot sense it!", "error");
+                } else if (!circuits.moisture.actuator) {
+                    waterVisual.classList.remove('active');
+                    showStatus("Warning: System detects dry soil, but has no pump to act!", "error");
+                }
+            } else {
+                waterVisual.classList.remove('active');
+            }
+
+            // 2. Fan Logic (IF Temp > 35°C)
+            const needsCooling = env.temp > 35;
+            const fanVisual = document.getElementById('sim-fan');
+            if (needsCooling) {
+                if (circuits.temp.sensor && circuits.temp.actuator) {
+                    fanVisual.classList.add('active'); // Fan spins!
+                } else {
+                    fanVisual.classList.remove('active');
+                    if(circuits.temp.sensor && !circuits.temp.actuator) showStatus("Overheating! Sensor detected it, but no fan to cool down.", "error");
+                }
+            } else {
+                fanVisual.classList.remove('active');
+            }
+
+            // 3. Grow Light Logic (IF Light < 30%)
+            const needsLight = env.light < 30;
+            const growlightVisual = document.getElementById('sim-growlight');
+            if (needsLight) {
+                if (circuits.light.sensor && circuits.light.actuator) {
+                    growlightVisual.classList.add('active'); // Light turns on!
+                } else {
+                    growlightVisual.classList.remove('active');
+                }
+            } else {
+                growlightVisual.classList.remove('active');
+            }
+        }
+
+        // Init
+        evaluateSystem();
+    </script>
+</body>
+</html>
